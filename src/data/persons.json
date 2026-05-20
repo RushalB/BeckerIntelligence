@@ -1,0 +1,82 @@
+[
+  {
+    "id": "8187b7d5291cbdb209c7e5cc8f3ec0992aff42255ba9b15a431e82590cf3907e",
+    "firstName": "Sarah",
+    "lastName": "Mitchell",
+    "jobTitle": "Chief Nursing Officer",
+    "companyName": "Ascension Health",
+    "email": "sarah.mitchell@ascensionhealth.org"
+  },
+  {
+    "id": "5425636ee47216d04b453c2d60f84de1589276243ce5ace7737540f72ee31dcd",
+    "firstName": "James",
+    "lastName": "Okafor",
+    "jobTitle": "VP of Revenue Cycle",
+    "companyName": "HCA Healthcare",
+    "email": "james.okafor@hcahealthcare.com"
+  },
+  {
+    "id": "04d7bc0f2f0841afc8f7383a2525a2c5edb805625dbe1b117b70ecc3d3004911",
+    "firstName": "Linda",
+    "lastName": "Nguyen",
+    "jobTitle": "Director of Clinical Informatics",
+    "companyName": "Mayo Clinic",
+    "email": "linda.nguyen@mayoclinic.org"
+  },
+  {
+    "id": "9163dbc091707b3caa9e82f2bd9633207c1c9d056230f07912d0538acb7d95f8",
+    "firstName": "Derek",
+    "lastName": "Holloway",
+    "jobTitle": "Hospital Administrator",
+    "companyName": "CommonSpirit Health",
+    "email": "derek.holloway@commonspirit.org"
+  },
+  {
+    "id": "3e3f5b026a07a80749963c72b259dc4a62f954a8ab20463fbb43d63f79788585",
+    "firstName": "Priya",
+    "lastName": "Sharma",
+    "jobTitle": "Chief Medical Officer",
+    "companyName": "Tenet Healthcare",
+    "email": "priya.sharma@tenethealth.com"
+  },
+  {
+    "id": "5158c9d58be2285201b3fc2020a96fe101b5f362df62eee7e57e74c1f4e5a332",
+    "firstName": "Marcus",
+    "lastName": "Chen",
+    "jobTitle": "Health IT Director",
+    "companyName": "Kaiser Permanente",
+    "email": "marcus.chen@kp.org"
+  },
+  {
+    "id": "13c2327da0f60ca7f97d2d21a5dd9337ca30d2cf74f845cf058e5ab66e8ce822",
+    "firstName": "Angela",
+    "lastName": "Torres",
+    "jobTitle": "SVP of Operations",
+    "companyName": "Advocate Aurora Health",
+    "email": "angela.torres@aah.org"
+  },
+  {
+    "id": "7fd81655e44b35677461ceac3ecdfb7321f7a4af117e131e54afb8490938babb",
+    "firstName": "Robert",
+    "lastName": "Steinberg",
+    "jobTitle": "CFO",
+    "companyName": "Banner Health",
+    "email": "robert.steinberg@bannerhealth.com"
+  },
+  {
+    "id": "6b04b13adff3e74281252a57dca2d1b887ebcfb199190da10c4dfc2324fe444e",
+    "firstName": "Fatima",
+    "lastName": "Al-Hassan",
+    "jobTitle": "Patient Experience Officer",
+    "companyName": "Cleveland Clinic",
+    "email": "fatima.alhassan@ccf.org"
+  },
+  {
+    "id": "dc4ca1162b21adcf7352eaa2426d7b4a88d22d9ba15bad1182085ffb1133e987",
+    "firstName": "Kevin",
+    "lastName": "Park",
+    "jobTitle": "Director of Supply Chain",
+    "companyName": "Intermountain Healthcare",
+    "email": "kevin.park@intermountain.org"
+  }
+]

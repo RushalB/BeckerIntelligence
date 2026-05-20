@@ -1,0 +1,17 @@
+/* Shared shell for all preview cards. Import after colors_and_type.css. */
+html, body { margin: 0; padding: 0; background: #fff; }
+body {
+  font-family: var(--font-sans);
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  width: 700px;
+  padding: 24px 28px;
+  box-sizing: border-box;
+  background: #fff;
+}
+.row { display: flex; gap: 12px; align-items: center; }
+.col { display: flex; flex-direction: column; gap: 6px; }
+.mono { font-family: var(--font-mono); font-size: 11px; color: var(--color-fg-subtle); }
+.caption { font-family: var(--font-sans); font-size: 12px; color: var(--color-fg-muted); letter-spacing: .02em; }

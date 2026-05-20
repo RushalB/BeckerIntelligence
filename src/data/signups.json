@@ -1,0 +1,132 @@
+[
+  {
+    "id": "229d89c2e1aa9972651513d355e17bd04e26d765fcf72b45119c1159be8364f4",
+    "person": {
+      "id": "9163dbc091707b3caa9e82f2bd9633207c1c9d056230f07912d0538acb7d95f8",
+      "firstName": "Derek",
+      "lastName": "Holloway",
+      "jobTitle": "Hospital Administrator",
+      "companyName": "CommonSpirit Health",
+      "email": "derek.holloway@commonspirit.org"
+    },
+    "signupDate": "2026-05-02T13:22:00.000Z",
+    "assetId": "5af0e596b3c7e95aaafe42e01222f91666354f9152238bcf443b2c4c4ac46cfa"
+  },
+  {
+    "id": "86a58a5e57e9996a2b8f7d4167967a40db854ca1eafa07f1ab3ab0709aa2698e",
+    "person": {
+      "id": "13c2327da0f60ca7f97d2d21a5dd9337ca30d2cf74f845cf058e5ab66e8ce822",
+      "firstName": "Angela",
+      "lastName": "Torres",
+      "jobTitle": "SVP of Operations",
+      "companyName": "Advocate Aurora Health",
+      "email": "angela.torres@aah.org"
+    },
+    "signupDate": "2026-05-03T09:10:00.000Z",
+    "assetId": "5af0e596b3c7e95aaafe42e01222f91666354f9152238bcf443b2c4c4ac46cfa"
+  },
+  {
+    "id": "ff24e23a8e6e43b97b2ef5d12808da28c6ee3c4cfc02df2e31166e3cf86232cd",
+    "person": {
+      "id": "8187b7d5291cbdb209c7e5cc8f3ec0992aff42255ba9b15a431e82590cf3907e",
+      "firstName": "Sarah",
+      "lastName": "Mitchell",
+      "jobTitle": "Chief Nursing Officer",
+      "companyName": "Ascension Health",
+      "email": "sarah.mitchell@ascensionhealth.org"
+    },
+    "signupDate": "2026-04-20T10:05:00.000Z",
+    "assetId": "f06de07ea2ec3e968986d3e66011213071b6f1c2457aefada4747475441891d4"
+  },
+  {
+    "id": "5702d867dcbdea98561dfd73ed374af276f4c3847e34f50a4f6b221267cffba6",
+    "person": {
+      "id": "dc4ca1162b21adcf7352eaa2426d7b4a88d22d9ba15bad1182085ffb1133e987",
+      "firstName": "Kevin",
+      "lastName": "Park",
+      "jobTitle": "Director of Supply Chain",
+      "companyName": "Intermountain Healthcare",
+      "email": "kevin.park@intermountain.org"
+    },
+    "signupDate": "2026-04-22T14:45:00.000Z",
+    "assetId": "693799036391ac138c314b04f8984d2ccb8bc242ebb48c1ced88bce1af718e50"
+  },
+  {
+    "id": "025452d9d9fa09da138d8c7fd6b1dae158107c562d67e58fe6538c3c622708df",
+    "person": {
+      "id": "5158c9d58be2285201b3fc2020a96fe101b5f362df62eee7e57e74c1f4e5a332",
+      "firstName": "Marcus",
+      "lastName": "Chen",
+      "jobTitle": "Health IT Director",
+      "companyName": "Kaiser Permanente",
+      "email": "marcus.chen@kp.org"
+    },
+    "signupDate": "2026-03-15T08:30:00.000Z",
+    "assetId": "1bccb3002b0a6f2811b93cf171db8bfa6fe3127d84a040bf6e91ff210847207a"
+  },
+  {
+    "id": "dd141071e48ed7541070893bb177d1adda0bd70703c5224b4fda2eb8e2a961b2",
+    "person": {
+      "id": "7fd81655e44b35677461ceac3ecdfb7321f7a4af117e131e54afb8490938babb",
+      "firstName": "Robert",
+      "lastName": "Steinberg",
+      "jobTitle": "CFO",
+      "companyName": "Banner Health",
+      "email": "robert.steinberg@bannerhealth.com"
+    },
+    "signupDate": "2026-05-06T11:00:00.000Z",
+    "assetId": "078436ec028e3615ce43f0072501097c1a3440324b8356d017d17e80d7f8c7db"
+  },
+  {
+    "id": "ad990e17bb3122a7921819ff1c2e548eb1c5d92c579c756bf2294a4787e01a37",
+    "person": {
+      "id": "5425636ee47216d04b453c2d60f84de1589276243ce5ace7737540f72ee31dcd",
+      "firstName": "James",
+      "lastName": "Okafor",
+      "jobTitle": "VP of Revenue Cycle",
+      "companyName": "HCA Healthcare",
+      "email": "james.okafor@hcahealthcare.com"
+    },
+    "signupDate": "2026-04-28T16:20:00.000Z",
+    "assetId": "864fd307dbf4fcc7c181dadb4c95158f54cd3347f27ef14aa49060425dae5bf6"
+  },
+  {
+    "id": "4205b9589b7ec40c23fa6f0b40ebb6c5b188c8729433c864ff4bf44db18916db",
+    "person": {
+      "id": "6b04b13adff3e74281252a57dca2d1b887ebcfb199190da10c4dfc2324fe444e",
+      "firstName": "Fatima",
+      "lastName": "Al-Hassan",
+      "jobTitle": "Patient Experience Officer",
+      "companyName": "Cleveland Clinic",
+      "email": "fatima.alhassan@ccf.org"
+    },
+    "signupDate": "2026-02-10T09:55:00.000Z",
+    "assetId": "d324fc1701ece864d28954f586d4a313109779b21cb3762a439dc4ffb4dc4e0a"
+  },
+  {
+    "id": "0f9409925e95abaca628d1901182d391d56c2c1d6092615cdfa7d3f4eb733e15",
+    "person": {
+      "id": "3e3f5b026a07a80749963c72b259dc4a62f954a8ab20463fbb43d63f79788585",
+      "firstName": "Priya",
+      "lastName": "Sharma",
+      "jobTitle": "Chief Medical Officer",
+      "companyName": "Tenet Healthcare",
+      "email": "priya.sharma@tenethealth.com"
+    },
+    "signupDate": "2026-05-07T13:00:00.000Z",
+    "assetId": "20daa36295eb84b020259bfbe1730a145e16df059e2ce52c0f102df38c9b687b"
+  },
+  {
+    "id": "8c15fff464be52a59a2d3b606a70143f56bbcc9c9e6115793907499784e27a2e",
+    "person": {
+      "id": "04d7bc0f2f0841afc8f7383a2525a2c5edb805625dbe1b117b70ecc3d3004911",
+      "firstName": "Linda",
+      "lastName": "Nguyen",
+      "jobTitle": "Director of Clinical Informatics",
+      "companyName": "Mayo Clinic",
+      "email": "linda.nguyen@mayoclinic.org"
+    },
+    "signupDate": "2026-05-09T10:30:00.000Z",
+    "assetId": "fc83af2eae2b09b79331a127f1233d9b42fb65f15ed26240e6163f6bf1d1888f"
+  }
+]

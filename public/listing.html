@@ -1,0 +1,1191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library | Becker's Hospital Review</title>
+  
+  <!-- Design System Fonts & Global CSS -->
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <link rel="stylesheet" href="/design_system/ui_kits/bhr-web/kit.css">
+  
+  <style>
+    body {
+      background-color: var(--bh-ice-050);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .bh-main {
+      flex: 1;
+      padding: 32px 0 56px 0;
+    }
+
+    /* Page Hero Banner */
+    .listing-hero {
+      background: var(--bh-navy-800);
+      color: #fff;
+      padding: 40px 0;
+      border-bottom: 4px solid var(--bh-red-800);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .listing-hero::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(154,27,42,0.1) 0%, transparent 60%);
+      top: -25%;
+      left: -25%;
+    }
+
+    .listing-hero h1 {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+
+    .listing-hero p {
+      font-size: 15px;
+      color: var(--bh-ice-100);
+      margin: 0;
+      max-width: 650px;
+      line-height: 1.5;
+    }
+
+    /* Filter & Browse Grid */
+    .catalog-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 992px) {
+      .catalog-layout {
+        grid-template-columns: 3fr 1fr;
+      }
+    }
+
+    /* Filter Toolbar Controls */
+    .toolbar {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .toolbar-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .toolbar-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    /* Search Input Styling */
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      max-width: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .search-wrapper {
+        max-width: 400px;
+      }
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px 10px 36px;
+      border: 1px solid var(--bh-gray-300);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--bh-navy-800);
+      box-shadow: 0 0 0 3px rgba(9,31,62,0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--bh-gray-500);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    /* Sort Control */
+    .sort-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sort-label {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--bh-gray-700);
+      white-space: nowrap;
+    }
+
+    .sort-select {
+      padding: 8px 12px;
+      border: 1px solid var(--bh-gray-300);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      background: #fff;
+      color: var(--bh-gray-900);
+      cursor: pointer;
+    }
+
+    .sort-select:focus {
+      outline: none;
+      border-color: var(--bh-navy-800);
+    }
+
+    /* Type Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--bh-gray-200);
+      padding-bottom: 12px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bh-gray-700);
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+
+    .tab-btn:hover {
+      background-color: var(--bh-ice-100);
+      color: var(--bh-navy-900);
+    }
+
+    .tab-btn.is-active {
+      background-color: var(--bh-navy-800);
+      color: #fff;
+      border-color: var(--bh-navy-800);
+    }
+
+    /* Result Counter and active filters summary */
+    .results-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 13.5px;
+      color: var(--bh-gray-700);
+    }
+
+    .result-count strong {
+      color: var(--bh-navy-900);
+    }
+
+    /* Asset Grid & Cards (Tailored high-premium BHR aesthetic) */
+    .assets-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .assets-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .asset-card {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      transition: all .15s ease;
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .asset-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    /* Card Header Cover Block */
+    .card-cover {
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+    }
+    
+    .card-cover.webinar {
+      background: linear-gradient(135deg, var(--bh-red-900), var(--bh-red-800));
+    }
+    
+    .card-cover.whitepaper {
+      background: linear-gradient(135deg, var(--bh-navy-800), var(--bh-navy-900));
+    }
+
+    .card-cover.podcast {
+      background: linear-gradient(135deg, var(--bh-navy-600), var(--bh-navy-800));
+    }
+
+    .cover-bg-glow {
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .card-kicker {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.12);
+      padding: 4px 10px;
+      border-radius: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .card-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      margin: 0 0 10px 0;
+      /* Webkit clamp for headlines */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 52px; /* Fixed height for clean grid alignments */
+    }
+
+    .card-sponsor {
+      font-size: 12.5px;
+      color: var(--bh-gray-700);
+      margin-bottom: 12px;
+    }
+
+    .card-sponsor strong {
+      color: var(--bh-navy-900);
+      font-weight: 600;
+    }
+
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--bh-gray-800);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      /* Clamp at 3 lines */
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 62px;
+    }
+
+    /* Inline date indicator */
+    .card-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: var(--bh-gray-700);
+      padding: 8px 0;
+      border-top: 1px solid var(--bh-gray-100);
+      margin-top: auto;
+      margin-bottom: 16px;
+    }
+
+    .card-date svg {
+      width: 14px;
+      height: 14px;
+      color: var(--bh-gray-500);
+    }
+
+    /* Clean visual actions */
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .access-badge-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green);
+      background-color: var(--green-light);
+      padding: 4px 8px;
+      border-radius: 2px;
+      border: 1px solid #c2ebd9;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .access-badge-indicator svg {
+      width: 12px;
+      height: 12px;
+      stroke-width: 3;
+    }
+
+    /* Page Navigation (Pagination) */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 40px;
+    }
+
+    .page-link {
+      padding: 8px 16px;
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--bh-navy-800);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color .15s ease;
+    }
+
+    .page-link:hover:not(.disabled) {
+      background-color: var(--bh-ice-050);
+      border-color: var(--bh-navy-300);
+    }
+
+    .page-link.disabled {
+      color: var(--bh-gray-300);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .page-indicator {
+      font-size: 13.5px;
+      color: var(--bh-gray-700);
+    }
+
+    /* Right column: Sidebar widgets */
+    .sidebar-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .sidebar-widget {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 24px;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .widget-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      border-bottom: 2px solid var(--bh-red-800);
+      padding-bottom: 8px;
+      margin: 0 0 16px 0;
+    }
+
+    /* User state / Recents List */
+    .recent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .recent-card {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 10px 12px;
+      background: var(--bh-ice-050);
+      border: 1px solid var(--bh-gray-100);
+      border-radius: 4px;
+      text-decoration: none;
+      transition: border-color .15s ease;
+    }
+
+    .recent-card:hover {
+      border-color: var(--bh-red-200);
+    }
+
+    .recent-card .kicker {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--bh-red-800);
+      letter-spacing: .06em;
+    }
+
+    .recent-card .title {
+      font-family: var(--font-serif);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      line-height: 1.35;
+    }
+
+    /* States styling */
+    .empty-state {
+      display: none;
+      text-align: center;
+      background: #fff;
+      border: 1px dashed var(--bh-gray-300);
+      border-radius: 4px;
+      padding: 48px 24px;
+      color: var(--bh-gray-700);
+    }
+
+    .empty-state h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--bh-navy-900);
+      margin: 0 0 8px 0;
+    }
+
+    .loading-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .loading-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Loading Skeletons */
+    .skeleton-card {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      height: 380px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .skeleton-block {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-glow 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    @keyframes skeleton-glow {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Switcher Bar (Borrowed from bhr-web kit) -->
+  <div class="bh-sitesw">
+    <div class="bh-sitesw__label">Site switcher</div>
+    <nav class="bh-sitesw__list">
+      <a href="#" class="bh-sitesw__item is-active">BHR</a>
+      <a href="#" class="bh-sitesw__item">Clinical</a>
+      <a href="#" class="bh-sitesw__item">Health IT</a>
+      <a href="#" class="bh-sitesw__item">CFO</a>
+      <a href="#" class="bh-sitesw__item">ASC</a>
+      <a href="#" class="bh-sitesw__item">Spine</a>
+      <a href="#" class="bh-sitesw__item">Dental</a>
+      <a href="#" class="bh-sitesw__item">Payer</a>
+      <a href="#" class="bh-sitesw__item">Behavioral</a>
+      <a href="#" class="bh-sitesw__item">Physician</a>
+    </nav>
+  </div>
+
+  <!-- Masthead Header (Borrowed from bhr-web kit) -->
+  <div class="bh-masthead">
+    <a class="bh-masthead__logo" href="/">
+      <img src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+    </a>
+    <div class="bh-masthead__spacer"></div>
+    <button class="bh-iconbtn" aria-label="Search" onclick="document.getElementById('search-input').focus()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+    </button>
+    <button class="bh-btn bh-btn--primary" onclick="alert('Thank you for subscribing to Becker\'s!')">Subscribe</button>
+  </div>
+
+  <!-- Section Navigation Bar (Borrowed from bhr-web kit) -->
+  <nav class="bh-sectnav">
+    <a href="/" class="bh-sectnav__item">Home</a>
+    <a href="/listing.html" class="bh-sectnav__item is-active">All Assets</a>
+    <a href="/listing.html?type=Webinar" class="bh-sectnav__item">Webinars</a>
+    <a href="/listing.html?type=Whitepaper" class="bh-sectnav__item">Whitepapers</a>
+    <a href="#" class="bh-sectnav__item">Clinical Care</a>
+    <a href="#" class="bh-sectnav__item">Resources</a>
+    <a href="#" class="bh-sectnav__item">Events</a>
+  </nav>
+
+  <!-- Hero Header Banner -->
+  <header class="listing-hero">
+    <div class="bh-container">
+      <h1>Knowledge & Resource Library</h1>
+      <p>Elevate your healthcare administration and clinical leadership. Explore expert insights, on-demand sessions, research surveys, and BED-SIDE best practices sponsored by leading solutions providers.</p>
+    </div>
+  </header>
+
+  <!-- Main Content Body -->
+  <main class="bh-main">
+    <div class="bh-container">
+      
+      <div class="catalog-layout">
+        
+        <!-- Left Side: Interactive catalog -->
+        <section class="main-catalog">
+          
+          <!-- Category Tabs Navigation -->
+          <nav class="filter-tabs" id="type-tabs">
+            <button class="tab-btn is-active" data-type="all">All Library Assets</button>
+            <button class="tab-btn" data-type="webinar">Webinars</button>
+            <button class="tab-btn" data-type="whitepaper">Whitepapers</button>
+            <button class="tab-btn" data-type="podcast">Podcasts</button>
+          </nav>
+
+          <!-- Search and Sort Toolbar -->
+          <div class="toolbar">
+            <div class="toolbar-row">
+              <!-- Search box -->
+              <div class="search-wrapper">
+                <span class="search-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+                  </svg>
+                </span>
+                <input type="text" id="search-input" class="search-input" placeholder="Search by title, description, or sponsor...">
+              </div>
+
+              <!-- Sorting dropdown -->
+              <div class="sort-wrapper">
+                <span class="sort-label">Sort By</span>
+                <select id="sort-control" class="sort-select">
+                  <option value="newest">Newest First</option>
+                  <option value="oldest">Oldest First</option>
+                  <option value="name">Title (A-Z)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result Metadata -->
+          <div class="results-summary">
+            <div class="result-count" id="result-counter">
+              Loading library items...
+            </div>
+          </div>
+
+          <!-- Loading Skeleton Placeholder state -->
+          <div id="catalog-loading" class="loading-grid">
+            <div class="skeleton-card">
+              <div class="skeleton-block" style="height: 100px; width: 100%;"></div>
+              <div class="skeleton-block" style="height: 28px; width: 80%;"></div>
+              <div class="skeleton-block" style="height: 16px; width: 40%;"></div>
+              <div class="skeleton-block" style="height: 60px; width: 100%;"></div>
+              <div class="skeleton-block" style="height: 36px; width: 100%; margin-top: auto;"></div>
+            </div>
+            <div class="skeleton-card">
+              <div class="skeleton-block" style="height: 100px; width: 100%;"></div>
+              <div class="skeleton-block" style="height: 28px; width: 60%;"></div>
+              <div class="skeleton-block" style="height: 16px; width: 50%;"></div>
+              <div class="skeleton-block" style="height: 60px; width: 100%;"></div>
+              <div class="skeleton-block" style="height: 36px; width: 100%; margin-top: auto;"></div>
+            </div>
+          </div>
+
+          <!-- Empty catalog state -->
+          <div id="catalog-empty" class="empty-state">
+            <h3>No assets found matching your criteria</h3>
+            <p>Try resetting your keyword filters, checking your spelling, or changing the selected category type tab.</p>
+            <button class="bh-btn bh-btn--ghost bh-btn--sm" id="reset-filters-btn" style="margin-top: 16px;">Reset Library Catalog</button>
+          </div>
+
+          <!-- Rendered Asset Grid -->
+          <div id="catalog-grid" class="assets-grid" style="display: none;">
+            <!-- Rendered in script -->
+          </div>
+
+          <!-- Pagination elements -->
+          <div class="pagination" id="pagination-controls" style="display: none;">
+            <button class="page-link" id="prev-page-btn">&larr; Previous</button>
+            <span class="page-indicator" id="page-number-display">Page 1 of 2</span>
+            <button class="page-link" id="next-page-btn">Next &rarr;</button>
+          </div>
+
+        </section>
+        
+        <!-- Right Side: Sidebar panels -->
+        <aside class="sidebar-wrapper">
+          
+          <!-- Access status / Recents list -->
+          <div class="sidebar-widget" id="access-tracker-widget" style="display: none;">
+            <h4 class="widget-title">Unlocked Content</h4>
+            <div class="recent-list" id="unlocked-content-list">
+              <!-- Dynamically populated from localStorage -->
+            </div>
+          </div>
+
+          <!-- Editorial News box -->
+          <div class="sidebar-widget">
+            <h4 class="widget-title">BHR Daily News</h4>
+            <p style="font-size:13px; color:var(--bh-gray-700); line-height:1.5; margin-bottom:14px;">
+              Get the latest hospital and health system editorial updates delivered direct to your inbox each morning. Join 500,000+ key healthcare leaders.
+            </p>
+            <div class="bh-news__form" style="flex-direction: column; gap: 8px;">
+              <input type="email" placeholder="Enter your business email" aria-label="Business Email" style="width:100%; padding:9px 12px; font-size:13px; border:1px solid var(--bh-gray-300); border-radius:4px;">
+              <button class="bh-btn bh-btn--secondary bh-btn--sm" onclick="alert('Thank you for subscribing to Becker\'s Daily News!')" style="width: 100%;">Subscribe Free</button>
+            </div>
+          </div>
+
+          <!-- Advertisement Mock Slot -->
+          <div class="bh-ad">
+            Advertisement
+          </div>
+
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Sticky Subscribe floating pill -->
+  <button class="bh-subpill" onclick="alert('Subscribe to start receiving our premium updates.')">Subscribe</button>
+
+  <!-- Footer (Borrowed from bhr-web kit) -->
+  <footer class="bh-footer">
+    <div class="bh-footer__inner">
+      <div class="bh-footer__brand">
+        <img class="bh-footer__logo" src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+        <h4>Contact Us</h4>
+        <a class="bh-footer__phone" href="tel:18004172035">1-800-417-2035</a>
+        <a class="bh-footer__mail" href="mailto:becker@beckershealthcare.com">becker@beckershealthcare.com</a>
+        <div class="bh-footer__social">
+          <a href="#">RSS</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+          <a href="#">X</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+      <div class="bh-footer__col">
+        <h4>Other Becker's Sites</h4>
+        <ul>
+          <li><a href="#">ASC</a></li>
+          <li><a href="#">Spine</a></li>
+          <li><a href="#">Dental</a></li>
+          <li><a href="#">Payer</a></li>
+          <li><a href="#">Behavioral</a></li>
+          <li><a href="#">Physician</a></li>
+        </ul>
+      </div>
+      <div class="bh-footer__col">
+        <h4>More Resources</h4>
+        <ul>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Whitepapers</a></li>
+          <li><a href="#">Live Webinars</a></li>
+          <li><a href="#">OnDemand Webinars</a></li>
+          <li><a href="#">Podcasts</a></li>
+          <li><a href="#">Print Issues</a></li>
+        </ul>
+      </div>
+      <div class="bh-footer__col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Becker's</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Media Kit</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bh-footer__legal">
+      <span>Copyright © 2026 Becker's Healthcare. All Rights Reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // State Store
+    let allAssets = [];
+    let filteredAssets = [];
+    
+    // Pagination state
+    const ITEMS_PER_PAGE = 6;
+    let currentPage = 1;
+
+    // Filters state
+    let activeTypeFilter = 'all';
+    let searchQuery = '';
+    let sortKey = 'newest';
+
+    // SVG Icons Map
+    const TYPE_ICONS = {
+      'Webinar': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
+      'Whitepaper': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
+      'Podcast': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`
+    };
+
+    // Helper to format UTC Date
+    function formatCardDate(dateStr, typeText) {
+      if (!dateStr) return 'Available On Demand';
+      
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      
+      const isLive = typeText.toLowerCase().includes('live webinar') || typeText.toLowerCase().includes('event');
+      
+      const options = { 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      };
+      
+      const prefix = isLive ? 'Goes Live:' : 'Released:';
+      return `${prefix} ${d.toLocaleDateString('en-US', options)}`;
+    }
+
+    // Helper to check access in localStorage
+    function hasAccess(assetId) {
+      return localStorage.getItem(`signup_${assetId}`) !== null;
+    }
+
+    // Initialize Page
+    async function initializeCatalog() {
+      // 1. Parse URL Parameter filter first
+      parseUrlParams();
+
+      // 2. Load dynamic Sidebar widget
+      renderSidebarAccessList();
+
+      // 3. Load dynamic assets
+      await fetchAssets();
+
+      // 4. Bind interactive elements
+      setupEventHandlers();
+    }
+
+    // Parse incoming queries like ?type=Webinar
+    function parseUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const typeParam = params.get('type');
+      
+      if (typeParam) {
+        const cleanType = typeParam.toLowerCase();
+        
+        // Remove active class from default tab
+        document.querySelectorAll('#type-tabs .tab-btn').forEach(btn => {
+          btn.classList.remove('is-active');
+          const dataType = btn.getAttribute('data-type');
+          
+          if (dataType === cleanType) {
+            btn.classList.add('is-active');
+            activeTypeFilter = cleanType;
+          }
+        });
+
+        // Set sub nav highlight
+        document.querySelectorAll('.bh-sectnav__item').forEach(el => {
+          el.classList.remove('is-active');
+          if (el.getAttribute('href').includes(`type=${typeParam}`)) {
+            el.classList.add('is-active');
+          }
+        });
+      }
+    }
+
+    // Load actual list from API
+    async function fetchAssets() {
+      const loader = document.getElementById('catalog-loading');
+      const grid = document.getElementById('catalog-grid');
+      const emptyState = document.getElementById('catalog-empty');
+      const resultsMeta = document.getElementById('result-counter');
+      
+      loader.style.display = 'grid';
+      grid.style.display = 'none';
+      emptyState.style.display = 'none';
+
+      try {
+        const response = await fetch('/assets');
+        if (!response.ok) throw new Error("API call failed");
+
+        const json = await response.json();
+        
+        if (json.data && json.data.length > 0) {
+          allAssets = json.data;
+          applyFiltersAndSort();
+        } else {
+          resultsMeta.innerText = "Showing 0 assets";
+          emptyState.style.display = 'block';
+        }
+      } catch (err) {
+        console.error("Error loading assets:", err);
+        resultsMeta.innerText = "Error loading library catalog.";
+        grid.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; background:#fff; border:1px solid var(--bh-red-100); color:var(--bh-red-800); border-radius:4px; text-align:center;">Failed to connect to the knowledge API. Please ensure your Express service is active on Port 3000.</div>`;
+        grid.style.display = 'grid';
+      } finally {
+        loader.style.display = 'none';
+      }
+    }
+
+    // Apply Client-Side filters, search, and sorts
+    function applyFiltersAndSort() {
+      // 1. Filter by Asset Type Tab
+      filteredAssets = allAssets.filter(asset => {
+        if (activeTypeFilter === 'all') return true;
+        
+        const typeStr = asset.assetType.toLowerCase();
+        
+        if (activeTypeFilter === 'webinar') {
+          return typeStr.includes('webinar');
+        }
+        if (activeTypeFilter === 'whitepaper') {
+          return typeStr.includes('whitepaper');
+        }
+        if (activeTypeFilter === 'podcast') {
+          return typeStr.includes('podcast');
+        }
+        return true;
+      });
+
+      // 2. Filter by Search Query (title, sponsor, description)
+      if (searchQuery.trim() !== '') {
+        const q = searchQuery.toLowerCase().trim();
+        filteredAssets = filteredAssets.filter(asset => {
+          return (
+            asset.name.toLowerCase().includes(q) ||
+            asset.sponsorName.toLowerCase().includes(q) ||
+            asset.description.toLowerCase().includes(q)
+          );
+        });
+      }
+
+      // 3. Apply sorting logic
+      filteredAssets.sort((a, b) => {
+        if (sortKey === 'name') {
+          return a.name.localeCompare(b.name);
+        }
+        
+        // Date sorts
+        const dateA = new Date(a.executionDate || a.lastModifiedDate || a.createdDate || 0);
+        const dateB = new Date(b.executionDate || b.lastModifiedDate || b.createdDate || 0);
+        
+        if (sortKey === 'newest') {
+          return dateB - dateA;
+        } else if (sortKey === 'oldest') {
+          return dateA - dateB;
+        }
+        return 0;
+      });
+
+      // Reset to first page when filters change
+      currentPage = 1;
+      
+      // Render
+      renderCatalogGrid();
+    }
+
+    // Render Grid Cards
+    function renderCatalogGrid() {
+      const grid = document.getElementById('catalog-grid');
+      const emptyState = document.getElementById('catalog-empty');
+      const paginationCtrls = document.getElementById('pagination-controls');
+      const resultsMeta = document.getElementById('result-counter');
+      
+      if (filteredAssets.length === 0) {
+        grid.style.display = 'none';
+        emptyState.style.display = 'block';
+        paginationCtrls.style.display = 'none';
+        resultsMeta.innerHTML = "Showing <strong>0</strong> assets";
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      grid.style.display = 'grid';
+
+      // 1. Calculate pagination values
+      const totalItems = filteredAssets.length;
+      const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+      
+      // Ensure current page is bounded
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+      
+      // Update result count
+      resultsMeta.innerHTML = `Showing <strong>${startIndex + 1}–${endIndex}</strong> of <strong>${totalItems}</strong> assets`;
+
+      // 2. Slice active page cards
+      const activePageItems = filteredAssets.slice(startIndex, endIndex);
+
+      // 3. Render cards
+      grid.innerHTML = activePageItems.map(asset => {
+        // Determine cover visual style
+        const typeStr = asset.assetType.toLowerCase();
+        let coverClass = 'webinar';
+        let badgeIcon = TYPE_ICONS['Webinar'];
+
+        if (typeStr.includes('whitepaper')) {
+          coverClass = 'whitepaper';
+          badgeIcon = TYPE_ICONS['Whitepaper'];
+        } else if (typeStr.includes('podcast')) {
+          coverClass = 'podcast';
+          badgeIcon = TYPE_ICONS['Podcast'];
+        }
+
+        // Check if user has pre-unlocked this
+        const userUnlocked = hasAccess(asset.id);
+        const actionBtnText = userUnlocked ? 'View Content' : 'Register & Access &rarr;';
+        const actionBtnClass = userUnlocked ? 'bh-btn--ghost' : 'bh-btn--primary';
+
+        return `
+          <article class="asset-card">
+            <div class="card-cover ${coverClass}">
+              <div class="cover-bg-glow"></div>
+              <span class="card-kicker">${asset.assetType}</span>
+            </div>
+            
+            <div class="card-body">
+              <h3 class="card-title" title="${asset.name}">${asset.name}</h3>
+              <div class="card-sponsor">Sponsored by <strong>${asset.sponsorName}</strong></div>
+              <p class="card-desc">${asset.description}</p>
+              
+              <div class="card-date">
+                ${badgeIcon}
+                <span>${formatCardDate(asset.executionDate || asset.expirationDate, asset.assetType)}</span>
+              </div>
+              
+              <div class="card-actions">
+                ${userUnlocked ? `
+                  <span class="access-badge-indicator">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    Unlocked
+                  </span>
+                ` : '<span></span>'}
+                
+                <a href="/signup.html?id=${asset.id}" class="bh-btn ${actionBtnClass} bh-btn--sm">
+                  ${actionBtnText}
+                </a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // 4. Update Pagination controls
+      if (totalPages > 1) {
+        paginationCtrls.style.display = 'flex';
+        document.getElementById('page-number-display').innerText = `Page ${currentPage} of ${totalPages}`;
+        
+        // Disabled classes
+        const prevBtn = document.getElementById('prev-page-btn');
+        const nextBtn = document.getElementById('next-page-btn');
+        
+        if (currentPage === 1) prevBtn.classList.add('disabled');
+        else prevBtn.classList.remove('disabled');
+        
+        if (currentPage === totalPages) nextBtn.classList.add('disabled');
+        else nextBtn.classList.remove('disabled');
+      } else {
+        paginationCtrls.style.display = 'none';
+      }
+    }
+
+    // Sidebar Tracker listing
+    function renderSidebarAccessList() {
+      const widget = document.getElementById('access-tracker-widget');
+      const list = document.getElementById('unlocked-content-list');
+      
+      const unlockedKeys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('signup_')) {
+          unlockedKeys.push(key);
+        }
+      }
+
+      if (unlockedKeys.length === 0) {
+        widget.style.display = 'none';
+        return;
+      }
+
+      widget.style.display = 'block';
+      list.innerHTML = unlockedKeys.map(key => {
+        const assetId = key.replace('signup_', '');
+        try {
+          const regData = JSON.parse(localStorage.getItem(key));
+          // If we have asset cache in the storage item, show it
+          const assetName = regData.assetName || "Unlocking Clinical Insights";
+          const assetType = regData.assetType || "Knowledge Hub";
+          
+          return `
+            <a href="/signup.html?id=${assetId}" class="recent-card">
+              <span class="kicker">${assetType}</span>
+              <span class="title">${assetName}</span>
+              <span style="font-size:11.5px; color:var(--green); font-weight:600; margin-top:2px;">• Ready to view</span>
+            </a>
+          `;
+        } catch (e) {
+          return `
+            <a href="/signup.html?id=${assetId}" class="recent-card">
+              <span class="kicker">Live webinar</span>
+              <span class="title">View registered webinar content</span>
+            </a>
+          `;
+        }
+      }).join('');
+    }
+
+    // Debounce Helper for Search box
+    let searchDebounceTimer;
+    function handleSearchInput(e) {
+      clearTimeout(searchDebounceTimer);
+      searchQuery = e.target.value;
+      
+      searchDebounceTimer = setTimeout(() => {
+        applyFiltersAndSort();
+      }, 300); // 300ms debounce window
+    }
+
+    // Event Listeners Binding
+    function setupEventHandlers() {
+      // 1. Search Input Keyups
+      document.getElementById('search-input').addEventListener('input', handleSearchInput);
+
+      // 2. Sort Controls Dropdowns
+      document.getElementById('sort-control').addEventListener('change', function(e) {
+        sortKey = e.target.value;
+        applyFiltersAndSort();
+      });
+
+      // 3. Category Type tab buttons
+      document.getElementById('type-tabs').addEventListener('click', function(e) {
+        const btn = e.target.closest('.tab-btn');
+        if (!btn) return;
+        
+        document.querySelectorAll('#type-tabs .tab-btn').forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        
+        activeTypeFilter = btn.getAttribute('data-type');
+        
+        // Match Section Nav highlights visually
+        document.querySelectorAll('.bh-sectnav__item').forEach(el => {
+          el.classList.remove('is-active');
+          if (activeTypeFilter === 'all' && el.innerText.toLowerCase() === 'all assets') el.classList.add('is-active');
+          if (activeTypeFilter === 'webinar' && el.innerText.toLowerCase() === 'webinars') el.classList.add('is-active');
+          if (activeTypeFilter === 'whitepaper' && el.innerText.toLowerCase() === 'whitepapers') el.classList.add('is-active');
+        });
+
+        applyFiltersAndSort();
+      });
+
+      // 4. Pagination buttons
+      document.getElementById('prev-page-btn').addEventListener('click', function() {
+        if (currentPage > 1) {
+          currentPage--;
+          renderCatalogGrid();
+          window.scrollTo({ top: 180, behavior: 'smooth' });
+        }
+      });
+
+      document.getElementById('next-page-btn').addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredAssets.length / ITEMS_PER_PAGE);
+        if (currentPage < totalPages) {
+          currentPage++;
+          renderCatalogGrid();
+          window.scrollTo({ top: 180, behavior: 'smooth' });
+        }
+      });
+
+      // 5. Reset button handler
+      document.getElementById('reset-filters-btn').addEventListener('click', function() {
+        document.getElementById('search-input').value = '';
+        searchQuery = '';
+        
+        document.querySelectorAll('#type-tabs .tab-btn').forEach(b => b.classList.remove('is-active'));
+        document.querySelector('#type-tabs [data-type="all"]').classList.add('is-active');
+        activeTypeFilter = 'all';
+        
+        document.getElementById('sort-control').value = 'newest';
+        sortKey = 'newest';
+        
+        applyFiltersAndSort();
+      });
+    }
+
+    // Kickoff catalog loader
+    initializeCatalog();
+  </script>
+</body>
+</html>

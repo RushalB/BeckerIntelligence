@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .switcher { display: flex; gap: 0; border-top: 1px solid var(--bh-gray-200); border-bottom: 1px solid var(--bh-gray-200); background:#fff; overflow:hidden; }
+  .switcher a { padding: 10px 14px; font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--bh-navy-800); text-decoration: none; border-right: 1px solid var(--bh-gray-200); }
+  .switcher a.active { background: var(--bh-navy-800); color:#fff; }
+  .switcher a:hover:not(.active) { background: var(--bh-ice-050); }
+  .main-nav { display:flex; gap: 28px; padding: 14px 4px; border-bottom: 1px solid var(--bh-gray-200); }
+  .main-nav a { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--bh-gray-900); text-decoration: none; }
+  .main-nav a:hover { color: var(--bh-red-800); }
+</style></head><body>
+<div class="card">
+  <div class="caption" style="margin-bottom:10px;">NAV · Site-switcher (top) + primary section nav (bottom).</div>
+  <div class="switcher">
+    <a class="active">BHR</a><a>Clinical</a><a>Health IT</a><a>CFO</a><a>ASC</a><a>Spine</a><a>Dental</a><a>Payer</a>
+  </div>
+  <div class="main-nav">
+    <a>Leadership</a><a>Finance</a><a>Health IT</a><a>Clinical Care</a><a>Specialties</a><a>Events</a>
+  </div>
+</div></body></html>

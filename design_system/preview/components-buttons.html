@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .btn { display: inline-flex; align-items:center; justify-content:center; padding: 10px 20px; font-family: var(--font-sans); font-size: 14px; font-weight: 600; border-radius: 4px; border: 1px solid transparent; cursor: pointer; transition: all .15s ease; }
+  .btn-primary { background: var(--bh-red-800); color: #fff; }
+  .btn-primary:hover { background: var(--bh-red-700); }
+  .btn-secondary { background: var(--bh-navy-800); color: #fff; }
+  .btn-secondary:hover { background: var(--bh-navy-700); }
+  .btn-ghost { background: transparent; color: var(--bh-navy-800); border-color: var(--bh-navy-800); }
+  .btn-ghost:hover { background: var(--bh-navy-800); color: #fff; }
+  .btn-text { background: transparent; color: var(--bh-red-800); border: 0; padding: 10px 0; }
+  .btn-text:hover { color: var(--bh-red-600); text-decoration: underline; }
+  .group { display:flex; gap: 12px; flex-wrap: wrap; align-items:center; }
+  .row5 { display:flex; gap:28px; margin-top:14px; }
+  .col5 { display:flex; flex-direction:column; gap:10px; }
+  .lbl { font-family: var(--font-mono); font-size:10px; color: var(--color-fg-subtle); }
+</style></head><body>
+<div class="card">
+  <div class="caption" style="margin-bottom:12px;">BUTTONS · Red for primary CTAs (Subscribe), navy for secondary, ghost for tertiary.</div>
+  <div class="row5">
+    <div class="col5"><span class="lbl">Primary</span><button class="btn btn-primary">Subscribe</button><button class="btn btn-primary" style="background:var(--bh-red-700)">Hover</button></div>
+    <div class="col5"><span class="lbl">Secondary</span><button class="btn btn-secondary">Register</button><button class="btn btn-secondary" style="background:var(--bh-navy-700)">Hover</button></div>
+    <div class="col5"><span class="lbl">Ghost</span><button class="btn btn-ghost">View Event</button><button class="btn btn-ghost" style="background:var(--bh-navy-800); color:#fff;">Hover</button></div>
+    <div class="col5"><span class="lbl">Text link</span><button class="btn btn-text">Read more →</button><button class="btn btn-text" style="color:var(--bh-red-600); text-decoration:underline;">Hover →</button></div>
+  </div>
+</div></body></html>

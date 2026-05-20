@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>UI Components Showcase</title>
+  <link rel="stylesheet" href="./colors_and_type.css">
+  <style>
+    body {
+      background-color: var(--bh-ice-050);
+      margin: 0;
+      padding: 0;
+      color: var(--color-fg);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: var(--fs-3xl);
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      margin-bottom: 24px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--bh-gray-200);
+      margin-top: 60px;
+    }
+
+    /* Card container for components */
+    .showcase-card {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .showcase-card-title {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-fg-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 24px;
+    }
+
+    /* Button styles */
+    .btn { display: inline-flex; align-items:center; justify-content:center; padding: 10px 20px; font-family: var(--font-sans); font-size: 14px; font-weight: 600; border-radius: 4px; border: 1px solid transparent; cursor: pointer; transition: all .15s ease; }
+    .btn-primary { background: var(--bh-red-800); color: #fff; }
+    .btn-primary:hover { background: var(--bh-red-700); }
+    .btn-secondary { background: var(--bh-navy-800); color: #fff; }
+    .btn-secondary:hover { background: var(--bh-navy-700); }
+    .btn-ghost { background: transparent; color: var(--bh-navy-800); border-color: var(--bh-navy-800); }
+    .btn-ghost:hover { background: var(--bh-navy-800); color: #fff; }
+    .btn-text { background: transparent; color: var(--bh-red-800); border: 0; padding: 10px 0; }
+    .btn-text:hover { color: var(--bh-red-600); text-decoration: underline; }
+    
+    .button-group { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    /* Form styles */
+    .field { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+    .lbl { font-family: var(--font-sans); font-size:13px; font-weight:600; color: var(--color-fg); }
+    .inp { padding: 10px 12px; border: 1px solid var(--bh-gray-300); border-radius: 4px; font-family: var(--font-sans); font-size:14px; background:#fff; }
+    .inp:focus { outline: none; border-color: var(--bh-navy-800); box-shadow: 0 0 0 3px rgba(154, 27, 42, 0.25); }
+    .help { font-size:12px; color: var(--color-fg-subtle); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 600px; }
+    
+    .news { background: var(--bh-ice-050); border: 1px solid var(--bh-ice-200); padding: 14px; border-radius: 4px; margin-top: 6px; display:flex; gap:8px; max-width: 400px;}
+    .news input { flex: 1; padding: 9px 10px; border: 1px solid var(--bh-gray-300); border-radius: 4px; font-family: var(--font-sans); font-size:14px; }
+    .news button { padding: 9px 18px; background: var(--bh-red-800); color: #fff; border: 0; border-radius: 4px; font-weight: 600; font-size: 14px; font-family: var(--font-sans); cursor:pointer; }
+
+    /* Tag styles */
+    .tags { display:flex; gap:8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag { display:inline-block; padding: 3px 10px; font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-radius: 999px; }
+    .tag-red { background: var(--bh-red-800); color: #fff; }
+    .tag-navy { background: var(--bh-navy-800); color: #fff; }
+    .tag-ice { background: var(--bh-ice-100); color: var(--bh-navy-800); }
+    .tag-outline { background: #fff; color: var(--bh-red-800); border: 1px solid var(--bh-red-800); }
+    
+    .kickers { display:flex; gap:18px; flex-wrap:wrap; }
+    .kicker { font-family: var(--font-sans); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bh-red-800); }
+
+    /* Article Card styles */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .art { background: #fff; border: 1px solid var(--bh-gray-200); border-radius: 4px; overflow: hidden; display:flex; flex-direction:column; transition: box-shadow .15s ease; }
+    .art:hover { box-shadow: 0 4px 10px rgba(9,31,62,0.08), 0 2px 4px rgba(9,31,62,0.05); cursor: pointer; }
+    .art .cover { height: 160px; background: linear-gradient(135deg, #1E3A6D, #091F3E); position: relative; }
+    .art .cover.pink { background: #E8A4A8; }
+    .art .body { padding: 16px; }
+    .art .h { font-family: var(--font-serif); font-weight: 700; font-size: 18px; line-height: 1.25; color: var(--bh-gray-900); margin: 8px 0 12px; text-wrap: balance; }
+    .art .by { font-family: var(--font-sans); font-size: 12px; color: var(--color-fg-subtle); }
+
+    /* Event Card styles */
+    .event { background: var(--bh-navy-800); color: #fff; padding: 24px; border-radius: 4px; display: flex; flex-direction: column; align-items: flex-start; }
+    .event .kicker { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bh-ice-200); }
+    .event .title { font-family: var(--font-serif); font-weight: 700; font-size: 22px; line-height: 1.2; margin: 12px 0 16px; color:#fff; }
+    .event .venue { font-size: 14px; color: var(--bh-ice-200); margin-bottom: 6px; }
+    .event .dates { font-size: 14px; color: #fff; font-weight: 600; }
+    .event .btn { margin-top: 20px; display:inline-block; padding: 10px 20px; background: var(--bh-red-800); color:#fff; border-radius: 4px; font-family: var(--font-sans); font-weight:600; font-size:14px; text-decoration: none; }
+    .event .btn:hover { background: var(--bh-red-700); cursor: pointer; }
+
+    /* Nav styles */
+    .switcher { display: flex; gap: 0; border: 1px solid var(--bh-gray-200); background:#fff; overflow:hidden; border-radius: 4px 4px 0 0; }
+    .switcher a { padding: 12px 16px; font-family: var(--font-sans); font-size: 13px; font-weight: 600; color: var(--bh-navy-800); text-decoration: none; border-right: 1px solid var(--bh-gray-200); cursor: pointer; }
+    .switcher a.active { background: var(--bh-navy-800); color:#fff; }
+    .switcher a:hover:not(.active) { background: var(--bh-ice-050); }
+    .main-nav { display:flex; gap: 32px; padding: 16px 20px; border-left: 1px solid var(--bh-gray-200); border-right: 1px solid var(--bh-gray-200); border-bottom: 1px solid var(--bh-gray-200); background: #fff; border-radius: 0 0 4px 4px;}
+    .main-nav a { font-family: var(--font-sans); font-size: 15px; font-weight: 600; color: var(--bh-gray-900); text-decoration: none; cursor: pointer;}
+    .main-nav a:hover { color: var(--bh-red-800); }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div style="text-align: center; margin-bottom: 60px;">
+      <h1 style="font-family: var(--font-serif); font-size: var(--fs-4xl); color: var(--bh-navy-900); margin-bottom: 8px;">Becker's Healthcare</h1>
+      <p style="font-family: var(--font-sans); font-size: var(--fs-lg); color: var(--color-fg-subtle);">Design System UI Component Showcase</p>
+    </div>
+
+    <!-- Navigation -->
+    <h2 class="section-title">Navigation</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Site Switcher & Main Nav</div>
+      <div class="switcher">
+        <a class="active">BHR</a>
+        <a>Clinical</a>
+        <a>Health IT</a>
+        <a>CFO</a>
+        <a>ASC</a>
+        <a>Spine</a>
+        <a>Dental</a>
+        <a>Payer</a>
+      </div>
+      <div class="main-nav">
+        <a>Leadership</a>
+        <a>Finance</a>
+        <a>Health IT</a>
+        <a>Clinical Care</a>
+        <a>Specialties</a>
+        <a>Events</a>
+      </div>
+    </div>
+
+    <!-- Typography (Tags & Kickers) -->
+    <h2 class="section-title">Metadata Indicators</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Tags</div>
+      <div class="tags">
+        <span class="tag tag-red">Featured</span>
+        <span class="tag tag-navy">New</span>
+        <span class="tag tag-ice">Sponsored</span>
+        <span class="tag tag-outline">Members Only</span>
+        <span class="tag tag-navy">Live Webinar</span>
+      </div>
+      
+      <div class="showcase-card-title" style="margin-top: 32px;">Kickers</div>
+      <div class="kickers">
+        <span class="kicker">Executive Moves</span>
+        <span class="kicker">Health IT</span>
+        <span class="kicker">Financial Management</span>
+        <span class="kicker">Transactions &amp; Valuation</span>
+      </div>
+    </div>
+
+    <!-- Actions (Buttons) -->
+    <h2 class="section-title">Actions</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Buttons</div>
+      <div class="button-group">
+        <button class="btn btn-primary">Primary Action</button>
+        <button class="btn btn-secondary">Secondary Action</button>
+        <button class="btn btn-ghost">Ghost Button</button>
+        <button class="btn btn-text">Text Link &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Form Controls -->
+    <h2 class="section-title">Form Controls</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Standard Inputs</div>
+      <div class="form-grid">
+        <div class="field">
+          <div class="lbl">First Name</div>
+          <input class="inp" placeholder="Jane" />
+        </div>
+        <div class="field">
+          <div class="lbl">Last Name</div>
+          <input class="inp" placeholder="Doe" />
+        </div>
+        <div class="field">
+          <div class="lbl">Work Email</div>
+          <input class="inp" placeholder="name@company.com" />
+          <div class="help">We'll never share your email.</div>
+        </div>
+        <div class="field">
+          <div class="lbl">Job Title</div>
+          <input class="inp" value="Chief Medical Officer" />
+        </div>
+      </div>
+      
+      <div class="showcase-card-title" style="margin-top: 32px;">Newsletter Signup</div>
+      <div class="news">
+        <input placeholder="Email address" />
+        <button>Subscribe Today</button>
+      </div>
+    </div>
+
+    <!-- Content Cards -->
+    <h2 class="section-title">Content Cards</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Article Cards</div>
+      <div class="card-grid">
+        <div class="art">
+          <div class="cover pink"></div>
+          <div class="body">
+            <div class="kicker">Featured</div>
+            <div class="h">Why 40% of hospitals are still losing money, according to CFOs</div>
+            <div class="by">By: Kelly Gooch &middot; 2 days ago</div>
+          </div>
+        </div>
+        <div class="art">
+          <div class="cover"></div>
+          <div class="body">
+            <div class="kicker">Executive Moves</div>
+            <div class="h">UCI Health names chief AI officer in historic appointment</div>
+            <div class="by">By: Giles Bruce &middot; 3 days ago</div>
+          </div>
+        </div>
+        <div class="art">
+          <div class="cover" style="background: linear-gradient(135deg, #125141, #082921);"></div>
+          <div class="body">
+            <div class="kicker">Health IT</div>
+            <div class="h">The future of generative AI in clinical decision support</div>
+            <div class="by">By: Laura Dyrda &middot; 5 days ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Cards -->
+    <h2 class="section-title">Event & Promo Cards</h2>
+    <div class="showcase-card">
+      <div class="showcase-card-title">Event Cards</div>
+      <div class="card-grid">
+        <div class="event">
+          <div class="kicker">Upcoming Event</div>
+          <div class="title">16th Annual Meeting</div>
+          <div class="venue">Hyatt Regency Chicago</div>
+          <div class="dates">Apr 13 &ndash; 16, 2026</div>
+          <a class="btn">Register Now</a>
+        </div>
+        <div class="event" style="background: var(--bh-navy-900);">
+          <div class="kicker">Virtual Webinar</div>
+          <div class="title">Oncology Executive Summit</div>
+          <div class="venue">Online Event</div>
+          <div class="dates">Apr 13 &ndash; 14, 2026</div>
+          <a class="btn">Save Your Spot</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | Becker's Healthcare Knowledge Portal</title>
+  
+  <!-- Design System Fonts & Global CSS -->
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <link rel="stylesheet" href="/design_system/ui_kits/bhr-web/kit.css">
+  
+  <style>
+    body {
+      background-color: var(--bh-ice-050);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .bh-main {
+      flex: 1;
+      padding: 0;
+    }
+
+    /* Core Hero banner styled using Becker's Brand Navy & Red Accent */
+    .hero-banner {
+      background: var(--bh-navy-800);
+      color: #fff;
+      padding: 72px 0;
+      border-bottom: 4px solid var(--bh-red-800);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      width: 150%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(154,27,42,0.12) 0%, transparent 60%);
+      top: -25%;
+      left: -25%;
+    }
+
+    .hero-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: var(--tracking-kicker);
+      text-transform: uppercase;
+      color: var(--bh-ice-200);
+      margin-bottom: 16px;
+      font-family: var(--font-sans);
+    }
+
+    .hero-banner h1 {
+      font-family: var(--font-serif);
+      font-size: 44px;
+      line-height: 1.2;
+      margin: 0 0 20px 0;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    @media (max-width: 576px) {
+      .hero-banner h1 {
+        font-size: 32px;
+      }
+    }
+
+    .hero-banner p {
+      font-size: 16px;
+      color: var(--bh-ice-100);
+      max-width: 650px;
+      margin: 0 auto 32px auto;
+      line-height: 1.6;
+    }
+
+    /* Teaser Section */
+    .featured-section {
+      padding: 56px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      border-bottom: 2px solid var(--bh-red-800);
+      padding-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      color: var(--bh-navy-900);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .view-all-link {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--bh-red-800);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .view-all-link:hover {
+      color: var(--bh-red-700);
+      text-decoration: underline;
+    }
+
+    /* Teaser Card Grid */
+    .teaser-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    @media (min-width: 768px) {
+      .teaser-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .teaser-card {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all .15s ease;
+      text-decoration: none;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .teaser-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .teaser-cover {
+      height: 110px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .teaser-cover.webinar {
+      background: linear-gradient(135deg, var(--bh-red-900), var(--bh-red-800));
+    }
+
+    .teaser-cover.whitepaper {
+      background: linear-gradient(135deg, var(--bh-navy-800), var(--bh-navy-900));
+    }
+
+    .teaser-cover.podcast {
+      background: linear-gradient(135deg, var(--bh-navy-600), var(--bh-navy-800));
+    }
+
+    .teaser-cover-glow {
+      position: absolute;
+      top: -20%;
+      left: -20%;
+      width: 140%;
+      height: 140%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .teaser-kicker {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.12);
+      padding: 4px 8px;
+      border-radius: 2px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .teaser-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .teaser-title {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 17px;
+      line-height: 1.35;
+      color: var(--bh-navy-900);
+      margin: 0 0 8px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 46px;
+    }
+
+    .teaser-sponsor {
+      font-size: 12px;
+      color: var(--bh-gray-700);
+      margin-bottom: 12px;
+    }
+
+    .teaser-desc {
+      font-size: 13px;
+      color: var(--bh-gray-800);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 58px;
+    }
+
+    .teaser-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      border-top: 1px solid var(--bh-gray-100);
+    }
+
+    .teaser-action {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--bh-red-800);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .teaser-card:hover .teaser-action {
+      color: var(--bh-red-600);
+      text-decoration: underline;
+    }
+
+    /* LocalStorage Recents Box */
+    .recents-banner {
+      background: var(--bh-ice-100);
+      border: 1px solid var(--bh-ice-200);
+      border-radius: 4px;
+      padding: 28px;
+      margin-bottom: 40px;
+      display: none; /* Block when keys present */
+    }
+
+    .recents-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      margin-bottom: 16px;
+    }
+
+    .recents-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .recents-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .recent-item {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+      transition: border-color .15s ease;
+    }
+
+    .recent-item:hover {
+      border-color: var(--bh-red-800);
+    }
+
+    .recent-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .recent-kicker {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--bh-red-800);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .recent-name {
+      font-family: var(--font-serif);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+    }
+
+    /* Core loading grid placeholder */
+    .loading-state {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 40px 0;
+    }
+
+    @media (min-width: 768px) {
+      .loading-state {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .loading-skeleton {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      height: 300px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .skeleton-block {
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-glow 1.5s infinite;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Switcher Bar (Borrowed from bhr-web kit) -->
+  <div class="bh-sitesw">
+    <div class="bh-sitesw__label">Site switcher</div>
+    <nav class="bh-sitesw__list">
+      <a href="#" class="bh-sitesw__item is-active">BHR</a>
+      <a href="#" class="bh-sitesw__item">Clinical</a>
+      <a href="#" class="bh-sitesw__item">Health IT</a>
+      <a href="#" class="bh-sitesw__item">CFO</a>
+      <a href="#" class="bh-sitesw__item">ASC</a>
+      <a href="#" class="bh-sitesw__item">Spine</a>
+      <a href="#" class="bh-sitesw__item">Dental</a>
+      <a href="#" class="bh-sitesw__item">Payer</a>
+      <a href="#" class="bh-sitesw__item">Behavioral</a>
+      <a href="#" class="bh-sitesw__item">Physician</a>
+    </nav>
+  </div>
+
+  <!-- Masthead Header (Borrowed from bhr-web kit) -->
+  <div class="bh-masthead">
+    <a class="bh-masthead__logo" href="/">
+      <img src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+    </a>
+    <div class="bh-masthead__spacer"></div>
+    <button class="bh-iconbtn" aria-label="Search" onclick="window.location.href='/listing.html'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+    </button>
+    <button class="bh-btn bh-btn--primary" onclick="alert('Thank you for subscribing to Becker\'s!')">Subscribe</button>
+  </div>
+
+  <!-- Section Navigation Bar (Borrowed from bhr-web kit) -->
+  <nav class="bh-sectnav">
+    <a href="/" class="bh-sectnav__item is-active">Home</a>
+    <a href="/listing.html" class="bh-sectnav__item">All Assets</a>
+    <a href="/listing.html?type=Webinar" class="bh-sectnav__item">Webinars</a>
+    <a href="/listing.html?type=Whitepaper" class="bh-sectnav__item">Whitepapers</a>
+    <a href="#" class="bh-sectnav__item">Clinical Care</a>
+    <a href="#" class="bh-sectnav__item">Resources</a>
+    <a href="#" class="bh-sectnav__item">Events</a>
+  </nav>
+
+  <!-- Hero Presentation Section -->
+  <main class="bh-main">
+    <section class="hero-banner">
+      <div class="bh-container">
+        <div class="hero-kicker">Professional · Trusted · Engaging</div>
+        <h1>Stay Ahead in Healthcare Leadership</h1>
+        <p>Discover our curated, expert-led webinars, in-depth whitepapers, and exclusive administrative podcasts designed to help you navigate clinical informatics, bedside support, and physician workflows.</p>
+        <a href="/listing.html" class="bh-btn bh-btn--primary" style="padding:14px 28px; font-size:15px;">Explore Resource Catalog &rarr;</a>
+      </div>
+    </section>
+
+    <!-- Page Body Grid container -->
+    <div class="bh-container" style="margin-top: 56px;">
+      
+      <!-- Recently Viewed / Registered Banner (LocalStorage bonus spec) -->
+      <section class="recents-banner" id="recently-registered-banner">
+        <h4 class="recents-title">Your Unlocked Access</h4>
+        <div class="recents-row" id="recently-registered-grid">
+          <!-- Populated from localStorage -->
+        </div>
+      </section>
+
+      <!-- Featured library assets teaser -->
+      <section class="featured-section">
+        <div class="section-header">
+          <h2>Featured Resource Library</h2>
+          <a href="/listing.html" class="view-all-link">Browse library catalog &rarr;</a>
+        </div>
+
+        <!-- Initial loading indicator -->
+        <div id="teaser-loading" class="loading-state">
+          <div class="loading-skeleton">
+            <div class="skeleton-block" style="height: 100px; width: 100%;"></div>
+            <div class="skeleton-block" style="height: 24px; width: 80%;"></div>
+            <div class="skeleton-block" style="height: 48px; width: 100%;"></div>
+          </div>
+          <div class="loading-skeleton">
+            <div class="skeleton-block" style="height: 100px; width: 100%;"></div>
+            <div class="skeleton-block" style="height: 24px; width: 70%;"></div>
+            <div class="skeleton-block" style="height: 48px; width: 100%;"></div>
+          </div>
+          <div class="loading-skeleton">
+            <div class="skeleton-block" style="height: 100px; width: 100%;"></div>
+            <div class="skeleton-block" style="height: 24px; width: 60%;"></div>
+            <div class="skeleton-block" style="height: 48px; width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- Rendered Card Teaser Grid -->
+        <div id="teaser-grid" class="teaser-grid" style="display: none;">
+          <!-- Loaded dynamically -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Sticky Subscribe Floating Pill -->
+  <button class="bh-subpill" onclick="alert('Join the 500,000+ healthcare executives who start their day with Becker\'s daily newsletters!')">Subscribe Today</button>
+
+  <!-- Footer (Borrowed from bhr-web kit) -->
+  <footer class="bh-footer">
+    <div class="bh-footer__inner">
+      <div class="bh-footer__brand">
+        <img class="bh-footer__logo" src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+        <h4>Contact Us</h4>
+        <a class="bh-footer__phone" href="tel:18004172035">1-800-417-2035</a>
+        <a class="bh-footer__mail" href="mailto:becker@beckershealthcare.com">becker@beckershealthcare.com</a>
+        <div class="bh-footer__social">
+          <a href="#">RSS</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Facebook</a>
+          <a href="#">X</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+      <div class="bh-footer__col">
+        <h4>Other Becker's Sites</h4>
+        <ul>
+          <li><a href="#">ASC</a></li>
+          <li><a href="#">Spine</a></li>
+          <li><a href="#">Dental</a></li>
+          <li><a href="#">Payer</a></li>
+          <li><a href="#">Behavioral</a></li>
+          <li><a href="#">Physician</a></li>
+        </ul>
+      </div>
+      <div class="bh-footer__col">
+        <h4>More Resources</h4>
+        <ul>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">Whitepapers</a></li>
+          <li><a href="#">Live Webinars</a></li>
+          <li><a href="#">OnDemand Webinars</a></li>
+          <li><a href="#">Podcasts</a></li>
+          <li><a href="#">Print Issues</a></li>
+        </ul>
+      </div>
+      <div class="bh-footer__col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Becker's</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Media Kit</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bh-footer__legal">
+      <span>Copyright © 2026 Becker's Healthcare. All Rights Reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Fetch and display featured items from API
+    async function loadTeasers() {
+      const loader = document.getElementById('teaser-loading');
+      const grid = document.getElementById('teaser-grid');
+      
+      try {
+        const response = await fetch('/assets');
+        if (!response.ok) throw new Error('API fetch error');
+
+        const json = await response.json();
+        
+        if (json.data && json.data.length > 0) {
+          // Select top 3 assets to tease
+          const teasers = json.data.slice(0, 3);
+          renderTeasers(teasers);
+        } else {
+          loader.innerText = 'No featured assets available.';
+        }
+      } catch (err) {
+        console.error('Error fetching teaser assets:', err);
+        loader.innerHTML = `<div style="grid-column:1/-1; padding:24px; background:#fff; border:1px solid var(--bh-red-100); color:var(--bh-red-800); border-radius:4px; text-align:center;">Failed to connect to the knowledge catalog API.</div>`;
+      } finally {
+        loader.style.display = 'none';
+      }
+    }
+
+    // Render teaser grid
+    function renderTeasers(assets) {
+      const grid = document.getElementById('teaser-grid');
+      grid.style.display = 'grid';
+      
+      grid.innerHTML = assets.map(asset => {
+        const typeStr = asset.assetType.toLowerCase();
+        let coverClass = 'webinar';
+        
+        if (typeStr.includes('whitepaper')) {
+          coverClass = 'whitepaper';
+        } else if (typeStr.includes('podcast')) {
+          coverClass = 'podcast';
+        }
+
+        // Check if unlocked
+        const hasAccess = localStorage.getItem(`signup_${asset.id}`) !== null;
+        const ctaLabel = hasAccess ? 'View Unlocked Content &rarr;' : 'Access Content &rarr;';
+
+        return `
+          <a href="/signup.html?id=${asset.id}" class="teaser-card">
+            <div class="teaser-cover ${coverClass}">
+              <div class="teaser-cover-glow"></div>
+              <span class="teaser-kicker">${asset.assetType}</span>
+            </div>
+            
+            <div class="teaser-body">
+              <h3 class="teaser-title" title="${asset.name}">${asset.name}</h3>
+              <div class="teaser-sponsor">Sponsored by <strong>${asset.sponsorName}</strong></div>
+              <p class="teaser-desc">${asset.description}</p>
+              
+              <div class="teaser-footer">
+                <span class="teaser-action">${ctaLabel}</span>
+                ${hasAccess ? `
+                  <span style="font-size:11px; font-weight:700; color:var(--green); background-color:var(--green-light); border:1px solid #c2ebd9; padding:2px 6px; border-radius:2px; text-transform:uppercase;">
+                    Unlocked
+                  </span>
+                ` : ''}
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+    }
+
+    // Check localStorage for active registrations (Personalization bonus spec)
+    function checkRecents() {
+      const banner = document.getElementById('recently-registered-banner');
+      const grid = document.getElementById('recently-registered-grid');
+      
+      const unlockedKeys = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('signup_')) {
+          unlockedKeys.push(key);
+        }
+      }
+
+      if (unlockedKeys.length === 0) {
+        banner.style.display = 'none';
+        return;
+      }
+
+      // Display banner
+      banner.style.display = 'block';
+      
+      // Load details of top 2 unlocked
+      grid.innerHTML = unlockedKeys.slice(0, 2).map(key => {
+        const assetId = key.replace('signup_', '');
+        try {
+          const regData = JSON.parse(localStorage.getItem(key));
+          const assetName = regData.assetName || "Unlocking Clinical Insights";
+          const assetType = regData.assetType || "Knowledge Hub";
+          
+          return `
+            <a href="/signup.html?id=${assetId}" class="recent-item">
+              <div class="recent-meta">
+                <span class="recent-kicker">${assetType}</span>
+                <span class="recent-name">${assetName}</span>
+              </div>
+              <span class="bh-btn bh-btn--ghost bh-btn--sm" style="color:var(--green); border-color:var(--green); font-size:11.5px;">View Content</span>
+            </a>
+          `;
+        } catch (e) {
+          return `
+            <a href="/signup.html?id=${assetId}" class="recent-item">
+              <div class="recent-meta">
+                <span class="recent-kicker">Resource</span>
+                <span class="recent-name">Registered Webinar Content</span>
+              </div>
+              <span class="bh-btn bh-btn--ghost bh-btn--sm" style="color:var(--green); border-color:var(--green); font-size:11.5px;">View Content</span>
+            </a>
+          `;
+        }
+      }).join('');
+    }
+
+    // Initialize
+    loadTeasers();
+    checkRecents();
+  </script>
+</body>
+</html>

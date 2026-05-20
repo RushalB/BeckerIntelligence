@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 12px 8px; }
+  .shape { width:100%; height:80px; background: #fff; border-radius: 4px; }
+  .n { font-family: var(--font-sans); font-size:12px; font-weight:600; text-align:center; margin-top:12px; }
+  .c { font-family: var(--font-mono); font-size: 10px; color: var(--color-fg-subtle); margin-top:4px; text-align:center; }
+</style></head><body>
+<div class="card" style="background: var(--bh-ice-050);">
+  <div class="caption" style="margin-bottom:6px;">ELEVATION · Minimal. Lift interactive elements, don't decorate.</div>
+  <div class="grid4">
+    <div>
+      <div class="shape" style="box-shadow: 0 1px 2px rgba(9,31,62,0.06);"></div>
+      <div class="n">xs</div><div class="c">hairline lift</div>
+    </div>
+    <div>
+      <div class="shape" style="box-shadow: 0 1px 3px rgba(9,31,62,0.08), 0 1px 2px rgba(9,31,62,0.04);"></div>
+      <div class="n">sm</div><div class="c">sticky nav</div>
+    </div>
+    <div>
+      <div class="shape" style="box-shadow: 0 4px 10px rgba(9,31,62,0.08), 0 2px 4px rgba(9,31,62,0.05);"></div>
+      <div class="n">md</div><div class="c">card hover</div>
+    </div>
+    <div>
+      <div class="shape" style="box-shadow: 0 12px 28px rgba(9,31,62,0.12), 0 4px 10px rgba(9,31,62,0.06);"></div>
+      <div class="n">lg</div><div class="c">dropdown</div>
+    </div>
+  </div>
+</div></body></html>

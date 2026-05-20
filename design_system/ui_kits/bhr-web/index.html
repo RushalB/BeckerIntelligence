@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Becker's Hospital Review — UI Kit</title>
+<meta name="viewport" content="width=1280" />
+<link rel="stylesheet" href="../../colors_and_type.css" />
+<link rel="stylesheet" href="kit.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="SiteSwitcher.jsx"></script>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="ArticleCard.jsx"></script>
+<script type="text/babel" src="EventAndCTA.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel" data-presets="react">
+const FEATURED = {
+  kicker: 'Featured · Transactions & Valuation',
+  title: "Arkansas system inks 2nd hospital acquisition in 5 weeks",
+  byline: 'By: Andrew Cass',
+  time: '2 days ago',
+  cover: '#E8A4A8',
+  body: [
+    "Little Rock, Ark.-based Baptist Health reached a definitive agreement to acquire Magnolia (Ark.) Regional Medical Center. The deal, subject to regulatory review, would mark the system's second acquisition in five weeks.",
+    "\"We are excited to expand access to high-quality care across southern Arkansas,\" said Baptist Health president and CEO Troy Wells in a statement released Monday.",
+    "The 68-bed Magnolia Regional currently operates as an independent community hospital and would retain its current leadership team through the transition, according to Baptist Health.",
+  ],
+  pullquote: "We are excited to expand access to high-quality care across southern Arkansas.",
+};
+
+const ARTICLES = [
+  { kicker:'Financial Management', title:"Providence's physician chief on its 'holistic' approach to value-based care", byline:'By: Kelly Gooch', time:'2 days ago', cover:'#1E3A6D' },
+  { kicker:'Pharmacy', title:"Mark Cuban wants to bring drug manufacturing to hospitals' doorsteps — literally", byline:'By: Elizabeth Casolo', time:'2 days ago', cover:'#091F3E' },
+  { kicker:'Executive Moves', title:'UCI Health names chief AI officer', byline:'By: Giles Bruce', time:'2 days ago', cover:'#2E4D86' },
+  { kicker:'HR', title:'Kaiser Permanente unions ratify 52 labor contracts', byline:'By: Kelly Gooch', time:'2 days ago', cover:'#122A54' },
+  { kicker:'Workforce', title:'Care is shifting to outpatient settings: How CHROs are scaling roles', byline:'By: Kristin Kuchno', time:'2 days ago', cover:'#1E3A6D' },
+  { kicker:'Academic Medical Center', title:"U of California uses EHR tool to lower patients' hypertension", byline:'By: Mariah Taylor', time:'2 days ago', cover:'#B7C6DD' },
+];
+
+const MOST_READ = [
+  { title:'2026 best pharmacy schools: US News', byline:'Ella Jeffries', time:'Wed, Apr 8, 2026' },
+  { title:'Highest-earning execs at HCA, Tenet, UHS and CHS', byline:'Alan Condon', time:'2 days ago' },
+  { title:'Mass General Brigham, CVS deal could raise healthcare spending $40M annually: Report', byline:'Paige Twenter', time:'2 days ago' },
+  { title:'7 physician specialties see pay drops', byline:'Mariah Taylor', time:'Wed, Apr 15, 2026' },
+  { title:'8 systems restructuring C-suites in 2026', byline:'Kristin Kuchno', time:'Wed, Apr 15, 2026' },
+  { title:'Days cash on hand at 50 health systems', byline:'Andrew Cass', time:'Tue, Apr 14, 2026' },
+];
+
+const EVENTS = [
+  { title:'16th Annual Meeting', venue:'Hyatt Regency Chicago', dates:'Apr 13 – 16, 2026' },
+  { title:'4th Annual Spring Payer Issues Roundtable', venue:'Hyatt Regency Chicago', dates:'Apr 13 – 14, 2026' },
+  { title:'Oncology Executive Summit', venue:'Loews Chicago Hotel', dates:'Apr 13 – 14, 2026' },
+  { title:'Spring Chief Pharmacy Officer Summit', venue:'Loews Chicago Hotel', dates:'Apr 15 – 16, 2026' },
+];
+
+function HomePage({ onOpenArticle, onSubscribe }) {
+  return (
+    <React.Fragment>
+      <section className="bh-container" style={{padding:'24px 24px 0'}}>
+        <div className="bh-ad">Advertisement</div>
+      </section>
+
+      <section style={{padding: '24px 0 8px'}}>
+        <div className="bh-page-grid">
+          <div>
+            <h2 className="bh-sect-title">Featured Content</h2>
+            <ArticleCard
+              variant="feature"
+              kicker={FEATURED.kicker}
+              title={FEATURED.title}
+              byline={FEATURED.byline}
+              time={FEATURED.time}
+              cover={FEATURED.cover}
+              onOpen={() => onOpenArticle(FEATURED)}
+            />
+            <div style={{height: 24}} />
+            <div className="bh-cards-grid">
+              {ARTICLES.map((a) => (
+                <ArticleCard key={a.title} {...a} onOpen={() => onOpenArticle(a)} />
+              ))}
+            </div>
+          </div>
+          <aside>
+            <h2 className="bh-sect-title bh-sect-title--sm">Most Read</h2>
+            <div>
+              {MOST_READ.map((a, i) => (
+                <ArticleRow key={a.title} index={i+1} title={a.title} byline={a.byline} time={a.time} onOpen={() => onOpenArticle({...a, kicker:'Most Read'})} />
+              ))}
+            </div>
+            <div className="bh-ad" style={{marginTop:20}}>Advertisement · 300×250</div>
+          </aside>
+        </div>
+      </section>
+
+      <section className="bh-offerings-grid">
+        <OfferingTile icon="events" title="Events" description="Where healthcare leaders meet — see what's coming up." />
+        <OfferingTile icon="webinars" title="Webinars" description="Explore and register for webinars across a wide variety of topics." />
+        <OfferingTile icon="whitepapers" title="Whitepapers" description="Gain valuable insights & knowledge from our leading industry experts." />
+        <OfferingTile icon="podcasts" title="Podcasts" description="Listen to interviews and conversations on healthcare's most pressing issues." />
+      </section>
+
+      <section className="bh-container" style={{padding: '8px 24px 40px'}}>
+        <h2 className="bh-sect-title">Upcoming Events</h2>
+        <div className="bh-events-grid">
+          {EVENTS.map(e => <EventCard key={e.title} {...e} />)}
+        </div>
+      </section>
+
+      <section className="bh-container" style={{padding: '0 24px 48px'}}>
+        <NewsletterCTA onSubmit={onSubscribe} />
+      </section>
+    </React.Fragment>
+  );
+}
+
+function ArticleView({ article, onBack }) {
+  return (
+    <div className="bh-article-view">
+      <a className="back" href="#" onClick={(e)=>{e.preventDefault(); onBack();}}>← Back to homepage</a>
+      <div style={{marginTop: 18}}>
+        <div className="bh-kicker">{article.kicker || 'Article'}</div>
+        <h1>{article.title}</h1>
+      </div>
+      <div className="byline-block">
+        <div className="avatar" />
+        <div>
+          <div className="bh-byline">{article.byline || 'By: Becker\u2019s Staff'}</div>
+          <div style={{fontSize:12, color:'var(--color-fg-subtle)'}}>{article.time || 'Today'}</div>
+        </div>
+      </div>
+      <p className="sub">New analyses suggest the ripple effects of the sector's recent consolidation wave won't show up on the bottom line for years.</p>
+      {(article.body || [
+        'Becker\u2019s Hospital Review reporting draws on executive interviews, system filings, and publicly available financials to track how leadership teams at the 50 largest U.S. health systems are navigating the current operating environment.',
+        'In the most recent quarter, cost pressures eased slightly while labor expense growth continued to outpace revenue at a majority of systems surveyed.',
+        'Analysts caution that the trend is uneven across regions and may be masked by one-time supplemental payments recorded in the period.',
+      ]).map((p, i) => <p key={i}>{p}</p>)}
+      {article.pullquote && <blockquote>"{article.pullquote}"</blockquote>}
+      <p>Read more executive moves coverage and daily Becker\u2019s reporting by subscribing to the morning newsletter.</p>
+    </div>
+  );
+}
+
+function App() {
+  const [site, setSite] = React.useState('bhr');
+  const [section, setSection] = React.useState('Leadership');
+  const [view, setView] = React.useState({ kind: 'home' });
+  const [toast, setToast] = React.useState(null);
+
+  const openArticle = (a) => { setView({ kind: 'article', article: a }); window.scrollTo(0,0); };
+  const goHome = () => { setView({ kind: 'home' }); window.scrollTo(0,0); };
+  const subscribe = () => {
+    setToast('Check your inbox to confirm your subscription.');
+    setTimeout(() => setToast(null), 3200);
+  };
+
+  return (
+    <React.Fragment>
+      <SiteSwitcher current={site} onChange={setSite} />
+      <Masthead onSubscribe={subscribe} onSearch={() => setToast('Search is a mockup in this kit.')} />
+      <SectionNav current={section} onChange={setSection} />
+
+      {view.kind === 'home'
+        ? <HomePage onOpenArticle={openArticle} onSubscribe={subscribe} />
+        : <ArticleView article={view.article} onBack={goHome} />}
+
+      <Footer />
+      <SubscribePill onClick={subscribe} />
+
+      {toast && (
+        <div style={{position:'fixed', left:'50%', bottom:90, transform:'translateX(-50%)', background:'var(--bh-navy-800)', color:'#fff', padding:'12px 20px', borderRadius:4, fontSize:14, boxShadow:'0 12px 28px rgba(9,31,62,0.24)', zIndex: 40}}>{toast}</div>
+      )}
+    </React.Fragment>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>

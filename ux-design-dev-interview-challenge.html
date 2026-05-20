@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend Take-Home Assignment</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-muted: #555;
+    --ink-faint: #888;
+    --border: #e0ddd8;
+    --border-strong: #c8c4be;
+    --surface: #faf9f7;
+    --surface-accent: #f3f1ec;
+    --accent: #b85c38;
+    --accent-light: #f5ebe5;
+    --accent-dark: #8a3e22;
+    --green: #2d6a4f;
+    --green-light: #e8f5ef;
+    --blue: #1d4e89;
+    --blue-light: #e8eff8;
+    --gold: #b08922;
+    --gold-light: #fdf4dc;
+    --tag-bg: #ede9e3;
+    --tag-text: #4a4540;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f7f5f1;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .page-wrap {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 32px 100px;
+  }
+
+  code {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 12.5px;
+    background: var(--surface-accent);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    border-top: 3px solid var(--ink);
+    padding-top: 28px;
+    margin-bottom: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .masthead-left { flex: 1; min-width: 0; }
+  .masthead-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  .masthead h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    line-height: 1.18;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .masthead h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .masthead-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .meta-pill {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: 100px;
+    margin-bottom: 8px;
+  }
+  .pill-time  { background: var(--gold-light); color: var(--gold); border: 1px solid #e8d49a; }
+  .pill-level { background: var(--blue-light); color: var(--blue); border: 1px solid #b8cde8; }
+  .meta-divider { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
+  .meta-detail { font-size: 12px; color: var(--ink-faint); }
+
+  /* ── INTRO BLOCK ── */
+  .intro-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .intro-block p { color: var(--ink-muted); font-size: 14.5px; }
+  .intro-block p + p { margin-top: 12px; }
+  .intro-block strong { color: var(--ink); font-weight: 500; }
+
+  /* ── SECTION HEADERS ── */
+  .section-label {
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  /* ── DELIVERABLE CARDS ── */
+  .deliverables-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 600px) {
+    .deliverables-grid { grid-template-columns: 1fr; }
+  }
+  .deliverable-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .deliverable-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card-homepage::before { background: #b85c38; }
+  .card-listing::before  { background: #1d4e89; }
+  .card-signup::before   { background: #2d6a4f; }
+  .card-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--border-strong);
+    line-height: 1;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+  .deliverable-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .deliverable-card p  { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+  /* ── PAGE REQUIREMENT BLOCKS ── */
+  .req-section  { margin-bottom: 48px; }
+  .req-pages    { display: flex; flex-direction: column; gap: 28px; }
+
+  .req-page-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .req-page-header {
+    padding: 14px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .page-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .badge-home    { background: var(--accent-light); color: var(--accent-dark); }
+  .badge-listing { background: var(--blue-light);   color: var(--blue); }
+  .badge-signup  { background: var(--green-light);  color: var(--green); }
+  .page-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .page-desc {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    font-style: italic;
+  }
+
+  .req-page-body { padding: 24px; }
+
+  /* Plain block-level list — no flexbox, wraps naturally */
+  .req-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .req-list li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.65;
+  }
+  .req-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 12px;
+    color: var(--border-strong);
+    line-height: 1.65;
+  }
+  .req-list li strong { color: var(--ink); font-weight: 600; }
+
+  /* Field name tags inside list items */
+  .req-list .field {
+    display: inline;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--surface-accent);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--accent-dark);
+  }
+
+  /* Sub-list for field enumerations */
+  .field-list {
+    margin-top: 6px;
+    padding-left: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+  }
+  .field-list li {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+    background: var(--surface-accent);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 7px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+  .field-list li::before { display: none; }
+
+  /* Code block for request/response examples */
+  .req-code {
+    margin-top: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    overflow-x: auto;
+    white-space: pre;
+  }
+
+  .req-plus-note {
+    margin-top: 18px;
+    padding: 13px 16px;
+    background: var(--gold-light);
+    border-radius: 6px;
+    font-size: 13.5px;
+    color: #7a5e10;
+    border: 1px solid #e8d49a;
+    line-height: 1.6;
+  }
+  .req-plus-note .plus-label {
+    font-weight: 700;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    color: var(--gold);
+    display: block;
+  }
+
+  /* ── PROVIDED API ── */
+  .provided-section { margin-bottom: 48px; }
+  .provided-intro {
+    font-size: 14px;
+    color: var(--ink-muted);
+    margin-bottom: 20px;
+    line-height: 1.65;
+  }
+  .endpoint-block {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .endpoint-header {
+    background: var(--surface-accent);
+    padding: 11px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .endpoint-method {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+  }
+  .method-get  { background: var(--blue-light);  color: var(--blue); }
+  .method-post { background: var(--green-light); color: var(--green); }
+  .endpoint-path {
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .endpoint-body { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .endpoint-body p { font-size: 13.5px; color: var(--ink-muted); line-height: 1.6; }
+
+  .shape-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 580px) {
+    .shape-grid { grid-template-columns: 1fr; }
+  }
+  .shape-block { display: flex; flex-direction: column; gap: 6px; }
+  .shape-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  pre.code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: 'Menlo', 'Consolas', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--ink-muted);
+    overflow-x: auto;
+    white-space: pre;
+    margin: 0;
+  }
+  .endpoint-note {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    padding: 10px 14px;
+    background: var(--surface-accent);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    line-height: 1.55;
+  }
+
+  /* ── SUBMISSION CHECKLIST ── */
+  .checklist-section { margin-bottom: 48px; }
+  .checklist {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--ink-muted);
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.6;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--border-strong);
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .check-item strong { color: var(--ink); font-weight: 600; display: block; margin-bottom: 2px; }
+
+  /* ── TIPS ── */
+  .tips-section { margin-bottom: 48px; }
+  .tips-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 640px) {
+    .tips-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 420px) {
+    .tips-grid { grid-template-columns: 1fr; }
+  }
+  .tip-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .tip-icon { font-size: 18px; margin-bottom: 8px; }
+  .tip-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 5px; color: var(--ink); }
+  .tip-item p  { font-size: 12.5px; color: var(--ink-muted); line-height: 1.55; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--ink-faint);
+    flex-wrap: wrap;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 9px;
+    border-radius: 100px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    margin-right: 5px;
+    margin-bottom: 4px;
+    border: 1px solid var(--border);
+  }
+
+
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- MASTHEAD -->
+  <div class="masthead">
+    <div class="masthead-left">
+      <div class="masthead-label">Candidate Take-Home Assignment · Frontend / UX</div>
+      <h1>Design a <em>Content</em><br>Asset Portal</h1>
+    </div>
+    <div class="masthead-meta">
+      <div class="meta-pill pill-time">⏱ 4–6 hrs</div><br>
+      <div class="meta-pill pill-level">Mid–Senior Level</div>
+      <hr class="meta-divider">
+      <div class="meta-detail">Submit within 24 hrs of receiving</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-block">
+    <p>You're building a small, polished web experience for a media brand that lets visitors <strong>discover and sign up for content assets</strong> — think whitepapers, on-demand podcasts, and live and on-demand webinars. The focus of this exercise is entirely on <strong>frontend craft and UX thinking</strong>.</p>
+    <p>A real backend is <strong>provided and running</strong> — start it with <code>npm run dev</code> and it will serve data at <code>http://localhost:3000</code>. Wire your UI to the live API using <code>fetch()</code>. What we're evaluating is how you think about layout, interaction, component design, and the overall experience of browsing and converting.</p>
+  </div>
+
+  <!-- DELIVERABLES OVERVIEW -->
+  <div class="section-label">What to build</div>
+  <h2>Three pages, one cohesive experience</h2>
+  <div class="deliverables-grid">
+    <div class="deliverable-card card-homepage">
+      <div class="card-number">01</div>
+      <h3>Homepage</h3>
+      <p>Introduces the brand and surfaces the value of the content library. Drives visitors toward the asset listing.</p>
+    </div>
+    <div class="deliverable-card card-listing">
+      <div class="card-number">02</div>
+      <h3>Asset Listing</h3>
+      <p>Displays the full catalog of available assets with filtering or sorting. Each asset is actionable.</p>
+    </div>
+    <div class="deliverable-card card-signup">
+      <div class="card-number">03</div>
+      <h3>Sign-Up Page</h3>
+      <p>A focused conversion page for a single asset with a form, asset summary, and confirmation state.</p>
+    </div>
+  </div>
+
+  <!-- PAGE REQUIREMENTS -->
+  <div class="req-section">
+    <div class="section-label">Page requirements</div>
+    <h2>Per-page specs</h2>
+    <div class="req-pages">
+
+      <!-- Page 1: Homepage -->
+      <div class="req-page-block">
+        <div class="req-page-header">
+          <span class="page-badge badge-home">Page 1</span>
+          <span class="page-title">Homepage</span>
+          <span class="page-desc">First impression + navigation hub</span>
+        </div>
+        <div class="req-page-body">
+          <ul class="req-list">
+            <li>
+              <strong>Hero section</strong> with a headline, short value proposition, and a clear primary CTA that leads to the asset listing page.
+            </li>
+            <li>
+              <strong>Brand identity</strong> — invent a name, a simple mark or wordmark, and a consistent visual voice. Commit to it across all three pages.
+            </li>
+            <li>
+              <strong>Content teaser</strong> — show at least 2–3 featured or recent assets (title, type, short description). Pull from the live API rather than hardcoding.
+            </li>
+            <li>
+              <strong>Navigation</strong> — a functional nav bar with links to the listing page and a consistent layout that carries through all pages.
+            </li>
+            <li>
+              <strong>Footer</strong> — minimal but present. Can include nav links, a tagline, or a secondary CTA.
+            </li>
+          </ul>
+          <div class="req-plus-note">
+            <span class="plus-label">✦ Bonus</span>
+            Show a "personalized for you" or "recently viewed" section using <code>localStorage</code>. Seed from the live API on first visit.
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 2: Asset Listing -->
+      <div class="req-page-block">
+        <div class="req-page-header">
+          <span class="page-badge badge-listing">Page 2</span>
+          <span class="page-title">Asset Listing</span>
+          <span class="page-desc">Catalog browse + discovery</span>
+        </div>
+        <div class="req-page-body">
+          <ul class="req-list">
+            <li>
+              <strong>Asset cards or list rows</strong> — each card should display the following fields from the API response:
+              <ul class="field-list">
+                <li>name</li>
+                <li>assetType</li>
+                <li>sponsorName</li>
+                <li>description</li>
+                <li>executionDate (when present)</li>
+              </ul>
+              Include a "Sign Up" or "Get Access" CTA that routes to the sign-up page for that asset's <code>id</code>.
+            </li>
+            <li>
+              <strong>Filter or sort controls</strong> — at minimum, allow filtering by <code>assetType</code>. The four valid values are:
+              <ul class="field-list">
+                <li>Live Webinar</li>
+                <li>On-Demand Webinar</li>
+                <li>Whitepaper</li>
+                <li>on-demand podcast</li>
+              </ul>
+              Multi-filter, keyword search, or sort-by-date are all encouraged.
+            </li>
+            <li>
+              <strong>Empty and loading states</strong> — show a loading indicator while <code>GET /assets</code> is in flight, and a friendly empty message when active filters return no results.
+            </li>
+            <li>
+              <strong>Pagination or infinite scroll</strong> — the API returns all assets in a single response. Avoid rendering all of them at once if it overwhelms the page.
+            </li>
+            <li>
+              <strong>Result count</strong> — display how many assets are currently showing, e.g. "Showing 8 of 10 assets".
+            </li>
+          </ul>
+          <div class="req-plus-note">
+            <span class="plus-label">✦ Bonus</span>
+            Add a debounced search bar that filters the API response client-side against <code>name</code>, <code>description</code>, and <code>sponsorName</code>. Or add a sort control by <code>executionDate</code> or <code>lastModifiedDate</code>.
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 3: Sign-Up -->
+      <div class="req-page-block">
+        <div class="req-page-header">
+          <span class="page-badge badge-signup">Page 3</span>
+          <span class="page-title">Sign-Up Page</span>
+          <span class="page-desc">Single-asset conversion + form</span>
+        </div>
+        <div class="req-page-body">
+          <ul class="req-list">
+            <li>
+              <strong>Asset summary panel</strong> — load the asset via <code>GET /assets/:id</code> and display:
+              <ul class="field-list">
+                <li>name</li>
+                <li>assetType (as a badge)</li>
+                <li>description</li>
+                <li>sponsorName</li>
+                <li>executionDate / expirationDate</li>
+                <li>speakers[] (if present)</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Sign-up form</strong> — the following fields are all required by the API:
+              <ul class="field-list">
+                <li>First name</li>
+                <li>Last name</li>
+                <li>Email</li>
+                <li>Job title</li>
+                <li>Company name</li>
+              </ul>
+              Validate required fields and email format before submitting.
+            </li>
+            <li>
+              <strong>Submit behavior</strong> — POST to <code>/assets/:id/signup</code> with the body structure below. On a <code>201</code> response, show a confirmation state inline (no redirect) that surfaces the returned <code>signupDate</code>.
+              <pre class="req-code">POST /assets/:id/signup
+Content-Type: application/json
+
+{
+  "person": {
+    "firstName": "...",
+    "lastName": "...",
+    "email": "...",
+    "jobTitle": "...",
+    "companyName": "..."
+  }
+}</pre>
+            </li>
+            <li>
+              <strong>Error handling</strong> — if the API returns a <code>4xx</code> status, parse the <code>{ "error": "..." }</code> response body and display the message inline without reloading the page.
+            </li>
+            <li>
+              <strong>Back navigation</strong> — provide an easy way to return to the listing. Preserving filter state is a plus.
+            </li>
+          </ul>
+          <div class="req-plus-note">
+            <span class="plus-label">✦ Bonus</span>
+            After a successful sign-up, fetch <code>GET /assets</code> and surface 2–3 "you might also like" assets by matching on <code>assetType</code> or <code>sponsorName</code>.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PROVIDED API -->
+  <div class="provided-section">
+    <div class="section-label">Provided for you</div>
+    <h2>Live backend API</h2>
+    <p class="provided-intro">
+      A real Express server is included in this repo. Run <code>npm run dev</code> to start it on <code>http://localhost:3000</code>.
+      All responses use the same envelope: <code>{ "data": T }</code> on success and <code>{ "error": "..." }</code> on failure.
+    </p>
+
+    <div class="endpoint-block">
+      <div class="endpoint-header">
+        <span class="endpoint-method method-get">GET</span>
+        <span class="endpoint-path">/assets</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Returns all lead gen assets as an array inside <code>data</code>.</p>
+        <div class="shape-grid">
+          <div class="shape-block">
+            <div class="shape-label">Response</div>
+            <pre class="code-block">// 200
+{
+  "data": [
+    {
+      "id": "5af0e596...",
+      "name": "The Future of AI...",
+      "description": "...",
+      "assetType": "Live Webinar",
+      "sponsorName": "Epic Systems",
+      "executionDate": "2026-06-10T...",
+      "expirationDate": "2026-12-31",
+      "speakers": [...],
+      "createdDate": "...",
+      "createdBy": "...",
+      "lastModifiedDate": "...",
+      "lastModifiedBy": "..."
+    }
+  ]
+}</pre>
+          </div>
+          <div class="shape-block">
+            <div class="shape-label">Asset type values</div>
+            <pre class="code-block">"Live Webinar"
+"On-Demand Webinar"
+"Whitepaper"
+"on-demand podcast"</pre>
+            <div class="shape-label" style="margin-top:12px">Speaker shape</div>
+            <pre class="code-block">{
+  "id": "...",
+  "firstName": "...",
+  "lastName": "...",
+  "jobTitle": "...",
+  "companyName": "...",
+  "email": "..."
+}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="endpoint-block">
+      <div class="endpoint-header">
+        <span class="endpoint-method method-get">GET</span>
+        <span class="endpoint-path">/assets/:id</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Returns a single asset by its <code>id</code>. Returns <code>404</code> with <code>{ "error": "Asset not found" }</code> when the id does not exist.</p>
+      </div>
+    </div>
+
+    <div class="endpoint-block">
+      <div class="endpoint-header">
+        <span class="endpoint-method method-post">POST</span>
+        <span class="endpoint-path">/assets/:id/signup</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Registers a person for an asset. The operation is idempotent — submitting the same person and asset twice returns the same signup record.</p>
+        <div class="shape-grid">
+          <div class="shape-block">
+            <div class="shape-label">Request body</div>
+            <pre class="code-block">{
+  "person": {
+    "firstName": "Jane",
+    "lastName": "Smith",
+    "jobTitle": "CFO",
+    "companyName": "Acme Health",
+    "email": "jane@acme.com"
+  }
+}</pre>
+          </div>
+          <div class="shape-block">
+            <div class="shape-label">201 Response</div>
+            <pre class="code-block">{
+  "data": {
+    "id": "a3f9c2...",
+    "assetId": "5af0e5...",
+    "signupDate": "2026-05-11T...",
+    "person": {
+      "id": "7b1d44...",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "email": "jane@acme.com",
+      ...
+    }
+  }
+}</pre>
+          </div>
+        </div>
+        <div class="endpoint-note">
+          <strong>400</strong> is returned when the <code>person</code> field is missing from the request body.
+          Optionally pass <code>person.id</code> to preserve an existing contact identity across signups.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBMISSION CHECKLIST -->
+  <div class="checklist-section">
+    <div class="section-label">Before you submit</div>
+    <h2>Submission checklist</h2>
+    <div class="checklist">
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><strong>Working link or repo</strong> A GitHub repo with a README explaining how to run locally, OR a deployed link (Vercel, Netlify, CodeSandbox).</div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><strong>All three pages are functional</strong> Navigation between pages works. Forms validate and submit. Loading and error states are visible.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><strong>API calls are wired in</strong> All three pages fetch live data from the running backend — no hardcoded asset arrays or static HTML.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><strong>README with design decisions</strong> 3–5 sentences on your aesthetic choices, any tradeoffs you made, and what you'd do next with more time.</div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><strong>No broken layouts</strong> Test in Chrome at 1280px and 390px (iPhone). Both should be functional.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips-section">
+    <div class="section-label">A few notes from us</div>
+    <h2>Tips &amp; expectations</h2>
+    <div class="tips-grid">
+      <div class="tip-item">
+        <div class="tip-icon">🎨</div>
+        <h4>Bring a point of view</h4>
+        <p>Invent a brand and commit to it. A distinctive, intentional aesthetic scores higher than a generic one — even if it's unconventional.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">📐</div>
+        <h4>Scope deliberately</h4>
+        <p>3 polished pages beat 5 rough ones. If you're short on time, nail the listing page and sign-up — that's the critical path.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">✍️</div>
+        <h4>Use real content</h4>
+        <p>Don't use "Lorem ipsum." The backend ships 10 real-looking assets. Let the actual names, descriptions, and sponsor names drive your UI copy.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">🔧</div>
+        <h4>Any stack is fine</h4>
+        <p>React, Vue, Svelte, plain HTML/CSS/JS — use what you're fastest and most confident with. We're not evaluating framework choice.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">💬</div>
+        <h4>Document the why</h4>
+        <p>A short README note about a tradeoff or design decision shows us how you think, and we weight that heavily in reviews.</p>
+      </div>
+      <div class="tip-item">
+        <div class="tip-icon">🚀</div>
+        <h4>Bonus ≠ required</h4>
+        <p>The bonus features reward initiative but missing them won't hurt you. Focus on the core experience first.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <div>
+      <span class="tag">Frontend</span>
+      <span class="tag">UX Design</span>
+      <span class="tag">React / HTML</span>
+      <span class="tag">Take-Home</span>
+    </div>
+    <div>Questions? Reach out before you start.</div>
+  </div>
+
+</div>
+</body>
+</html>

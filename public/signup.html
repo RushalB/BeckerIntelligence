@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Becker's Hospital Review</title>
+  
+  <!-- Design System Fonts & Global CSS -->
+  <link rel="stylesheet" href="/design_system/colors_and_type.css">
+  <link rel="stylesheet" href="/design_system/ui_kits/bhr-web/kit.css">
+  
+  <style>
+    /* Global Overrides & Enhancements */
+    body {
+      background-color: var(--bh-gray-100);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Layout structure */
+    .bh-main {
+      flex: 1;
+      padding: 40px 0;
+    }
+    
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 48px;
+      align-items: start;
+    }
+    
+    @media (max-width: 992px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* Left Panel: Asset details */
+    .asset-info-panel {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 40px;
+      position: relative;
+    }
+    
+    @media (max-width: 576px) {
+      .asset-info-panel {
+        padding: 24px;
+      }
+    }
+
+    .asset-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      background-color: var(--bh-red-050);
+      color: var(--bh-red-800);
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      margin-bottom: 24px;
+      border: 1px solid var(--bh-red-100);
+    }
+    
+    .asset-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--bh-navy-800);
+    }
+
+    .asset-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      line-height: 1.2;
+      color: var(--bh-navy-900);
+      margin: 0 0 12px 0;
+      font-weight: 700;
+    }
+    
+    @media (max-width: 576px) {
+      .asset-title {
+        font-size: 28px;
+      }
+    }
+
+    .asset-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding: 20px 0;
+      border-top: 1px solid var(--bh-gray-200);
+      border-bottom: 1px solid var(--bh-gray-200);
+      margin: 24px 0;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--bh-gray-700);
+      font-family: var(--font-sans);
+    }
+    
+    .meta-item strong {
+      color: var(--bh-navy-900);
+      font-weight: 600;
+    }
+
+    .meta-item .sponsor-name {
+      color: var(--bh-red-800);
+      font-weight: 700;
+    }
+
+    .meta-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bh-navy-800);
+      flex-shrink: 0;
+    }
+    
+    .meta-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+    }
+
+    .asset-cover-illustration {
+      height: 220px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+      background: var(--bh-navy-900);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .asset-cover-illustration::before {
+      content: none;
+    }
+    
+    .cover-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 2;
+    }
+    
+    .cover-icon-wrap svg {
+      width: 40px;
+      height: 40px;
+      fill: #fff;
+    }
+
+    .asset-desc {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--bh-gray-900);
+      margin-bottom: 24px;
+    }
+
+    /* Right Panel: Sidebar */
+    .sidebar-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: sticky;
+      top: 24px;
+    }
+    
+    .sidebar-card {
+      background: #fff;
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 32px;
+      transition: box-shadow .15s ease;
+    }
+
+    .sidebar-card:hover {
+      box-shadow: var(--shadow-sm);
+    }
+
+    .reg-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--bh-gray-200);
+    }
+
+    .reg-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--bh-navy-900);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .reg-text {
+      font-size: 14px;
+      color: var(--bh-gray-700);
+      line-height: 1.55;
+      margin-top: 8px;
+    }
+    
+    .sidebar-header {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--bh-navy-900);
+      margin: 0 0 16px 0;
+      font-weight: 700;
+      border-bottom: 2px solid var(--bh-red-800);
+      padding-bottom: 10px;
+    }
+
+    .speaker-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .speaker-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--bh-gray-200);
+    }
+
+    .speaker-card:last-child {
+      border-bottom: 0;
+    }
+
+    .speaker-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--bh-ice-050);
+      border: 1px solid var(--bh-gray-200);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .speaker-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .speaker-avatar-init {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--bh-navy-900);
+    }
+
+    .speaker-details {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .speaker-name {
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--bh-navy-900);
+      margin-bottom: 2px;
+    }
+
+    .speaker-title-text {
+      font-size: 13px;
+      color: var(--bh-gray-600);
+      line-height: 1.35;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      color: var(--bh-gray-700);
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--bh-gray-300);
+      border-radius: 4px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: var(--bh-navy-900);
+      background-color: #fff;
+      transition: border-color .15s ease, box-shadow .15s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--bh-navy-800);
+      box-shadow: 0 0 0 3px rgba(9,31,62,0.1);
+    }
+    
+    .form-control.error {
+      border-color: var(--bh-red-800);
+      background-color: var(--bh-red-050);
+    }
+
+    .error-box {
+      background-color: var(--bh-red-050);
+      border: 1px solid var(--bh-red-100);
+      color: var(--bh-red-800);
+      padding: 12px 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 20px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
+    }
+    
+    .btn-submit.active-access {
+      background-color: var(--bh-navy-800) !important;
+      color: #fff !important;
+    }
+
+    /* Success confirmation state */
+    .success-state {
+      display: none;
+      text-align: left;
+    }
+
+    .success-icon {
+      width: 48px;
+      height: 48px;
+      background-color: var(--bh-ice-050);
+      border: 1px solid var(--bh-ice-200);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bh-navy-800);
+      margin: 0 0 16px 0;
+    }
+
+    .success-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+    }
+
+    .success-headline {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--bh-navy-900);
+      margin: 0 0 8px 0;
+      font-weight: 700;
+    }
+
+    .success-message {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--bh-gray-700);
+      margin-bottom: 20px;
+    }
+    
+    .success-details {
+      background-color: var(--bh-ice-050);
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 12px;
+      margin-bottom: 16px;
+      text-align: left;
+      font-size: 13px;
+    }
+    
+    .success-details div {
+      margin-bottom: 6px;
+      color: var(--bh-gray-600);
+    }
+    .success-details div:last-child {
+      margin-bottom: 0;
+    }
+    
+    .success-details strong {
+      color: var(--bh-navy-900);
+    }
+
+    /* Recommended widgets section */
+    .related-section {
+      display: none;
+      padding: 56px 0 64px;
+      border-top: 1px solid var(--bh-gray-200);
+      background: #fff;
+    }
+    
+    .related-section.visible {
+      display: block;
+    }
+
+    .related-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--bh-red-800);
+      margin-bottom: 6px;
+    }
+    
+    .related-heading {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      margin: 0 0 32px 0;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--bh-red-800);
+      display: inline-block;
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    
+    @media (max-width: 768px) {
+      .related-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .related-card {
+      border: 1px solid var(--bh-gray-200);
+      border-radius: 4px;
+      padding: 20px;
+      text-decoration: none;
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: box-shadow .15s ease, border-color .15s ease;
+    }
+    
+    .related-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--bh-navy-800);
+    }
+    
+    .related-card-title {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--bh-navy-900);
+      line-height: 1.35;
+    }
+
+    /* Skeleton Screens */
+    .skeleton {
+      background: linear-gradient(90deg, var(--bh-ice-100) 25%, var(--bh-ice-050) 50%, var(--bh-ice-100) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 3px;
+      display: block;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-badge  { height: 26px; width: 120px; margin-bottom: 24px; border-radius: 2px; }
+    .skeleton-title  { height: 38px; width: 85%; margin-bottom: 10px; }
+    .skeleton-cover  { height: 220px; width: 100%; margin-bottom: 32px; border-radius: 4px; }
+    #skeleton-screen { display: none; }
+
+    /* Back link — matches .bh-article-view .back in kit.css */
+    .bh-back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bh-red-800);
+      text-decoration: none;
+    }
+    .bh-back-link:hover {
+      color: var(--bh-red-600);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead + Section Nav -->
+  <header>
+    <div style="background:#fff; border-bottom: 1px solid var(--bh-gray-200);">
+      <div class="bh-masthead" style="border-bottom:none;">
+        <a class="bh-masthead__logo" href="/">
+          <img src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+        </a>
+        <div class="bh-masthead__spacer"></div>
+        <button class="bh-btn bh-btn--primary" onclick="alert('Thank you for subscribing to Becker\'s!')">Subscribe</button>
+      </div>
+    </div>
+    <nav class="bh-sectnav">
+      <a href="/" class="bh-sectnav__item">Home</a>
+      <a href="/listing.html" class="bh-sectnav__item">All Assets</a>
+      <a href="/listing.html?type=Webinar" class="bh-sectnav__item is-active">Webinars</a>
+      <a href="/listing.html?type=Whitepaper" class="bh-sectnav__item">Whitepapers</a>
+      <a href="#" class="bh-sectnav__item">Clinical Care</a>
+      <a href="#" class="bh-sectnav__item">Resources</a>
+      <a href="#" class="bh-sectnav__item">Events</a>
+    </nav>
+  </header>
+
+  <!-- Main Content Page -->
+  <main class="bh-main">
+    <div class="bh-container">
+
+      <a href="/listing.html" class="bh-back-link" id="back-link">&#8592; Back to listing</a>
+
+      <div class="detail-grid">
+        
+        <!-- Left Panel: Asset Details -->
+        <section class="asset-info-panel">
+
+          <!-- Skeleton Screen -->
+          <div id="skeleton-screen">
+            <span class="skeleton skeleton-badge"></span>
+            <span class="skeleton skeleton-title"></span>
+            <div style="display:flex; gap:24px; padding: 20px 0; border-top:1px solid var(--bh-gray-200); border-bottom:1px solid var(--bh-gray-200); margin: 24px 0;">
+              <div style="height:18px; width:120px; background:var(--bh-ice-100);"></div>
+              <div style="height:18px; width:200px; background:var(--bh-ice-100);"></div>
+            </div>
+            <span class="skeleton skeleton-cover"></span>
+            <div style="margin-top:28px;">
+              <div style="height:14px; width:100%; background:var(--bh-ice-100); margin-bottom:8px;"></div>
+              <div style="height:14px; width:90%; background:var(--bh-ice-100); margin-bottom:8px;"></div>
+              <div style="height:14px; width:70%; background:var(--bh-ice-100);"></div>
+            </div>
+          </div>
+
+          <!-- Actual content -->
+          <div id="asset-content" style="display:none;">
+
+            <!-- Kicker Tag / Badge -->
+            <span class="asset-badge" id="asset-type-badge">
+              <svg viewBox="0 0 24 24">
+                <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/>
+              </svg>
+              <!-- TODO: use proper icon for webinar from design_system/assets/icons/webinars.svg -->
+              <span id="asset-type-text">Live Webinar</span>
+            </span>
+
+            <!-- Title -->
+            <h1 class="asset-title" id="asset-title">The future of AI in clinical decision support</h1>
+          
+            <!-- Metas -->
+            <div class="asset-meta">
+              <div class="meta-item">
+                <span class="meta-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </span>
+                <span>Presented by <strong class="sponsor-name" id="asset-sponsor">Epic Systems</strong></span>
+              </div>
+            
+              <div class="meta-item">
+                <span class="meta-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </span>
+                <span id="asset-date-string">Wednesday, June 10, 2026 at 2:00 PM UTC</span>
+              </div>
+            </div>
+
+            <!-- Cover Illustration -->
+            <div class="asset-cover-illustration">
+              <div class="cover-icon-wrap">
+                <svg viewBox="0 0 24 24" id="cover-svg-icon">
+                  <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="asset-desc" id="asset-description">
+              A live webinar exploring how AI-powered tools are transforming clinical decision-making at the bedside and reducing physician burnout.
+            </p>
+
+            <!-- Featured Speakers -->
+            <div id="speakers-section" style="margin-top:32px;">
+              <div class="sidebar-header">Featured Speakers</div>
+              <div class="speaker-list" id="speaker-list">
+                <!-- Speakers loaded dynamically -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Right Panel: Sidebar Column -->
+        <div class="sidebar-column">
+          <!-- Registration Card -->
+          <section class="sidebar-card" id="reg-card">
+            <div id="reg-form-content">
+              <div class="reg-header">
+                <h3 class="reg-title">Register to Access</h3>
+                <p class="reg-text">Complete the form to access this content.</p>
+              </div>
+
+              <div class="error-box" id="validation-errors"></div>
+
+              <form id="signup-form" novalidate>
+                <div class="form-group">
+                  <label for="email">Work Email</label>
+                  <input type="email" id="email" name="email" class="form-control" placeholder="name@hospital.org" required>
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Linda" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nguyen" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="jobTitle">Job Title</label>
+                  <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Director of Informatics" required>
+                </div>
+                <div class="form-group">
+                  <label for="companyName">Organization</label>
+                  <input type="text" id="companyName" name="companyName" class="form-control" placeholder="Mayo Clinic" required>
+                </div>
+                <button type="submit" class="bh-btn bh-btn--primary btn-submit" id="submit-btn" style="margin-top:8px;">
+                  Register & Access &rarr;
+                </button>
+              </form>
+            </div>
+
+            <!-- Success State -->
+            <div class="success-state" id="success-state">
+              <div class="success-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <h3 class="success-headline">Access Granted</h3>
+              <p class="success-message">Thank you for registering. You now have full access to this content.</p>
+              <div class="success-details">
+                <div><strong>Attendee:</strong> <span id="conf-name"></span></div>
+                <div><strong>Email:</strong> <span id="conf-email"></span></div>
+              </div>
+              <p style="font-size:11px; color:var(--bh-gray-500); line-height:1.4;">A confirmation has been sent to your email.</p>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Related Articles -->
+  <section class="related-section" id="related-section">
+    <div class="bh-container">
+      <p class="related-eyebrow">More from Becker's</p>
+      <h2 class="related-heading">Related content</h2>
+      <div class="related-grid" id="related-grid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="bh-footer">
+    <div class="bh-footer__inner">
+      <div class="bh-footer__brand">
+        <img class="bh-footer__logo" src="/design_system/assets/logos/beckers-hospital-review-logo.png" alt="Becker's Hospital Review">
+        <h4>Contact Us</h4>
+        <a class="bh-footer__phone" href="tel:18004172035">1-800-417-2035</a>
+        <a class="bh-footer__mail" href="mailto:becker@beckershealthcare.com">becker@beckershealthcare.com</a>
+      </div>
+      <div class="bh-footer__col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="#">About Becker's</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="bh-footer__legal">
+      <span>Copyright © 2026 Becker's Healthcare. All Rights Reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    const HARDCODED_ASSET = {
+      "id": "5af0e596b3c7e95aaafe42e01222f91666354f9152238bcf443b2c4c4ac46cfa",
+      "name": "The future of AI in clinical decision support",
+      "description": "A live webinar exploring how AI-powered tools are transforming clinical decision-making at the bedside and reducing physician burnout.",
+      "executionDate": "2026-06-10T14:00:00.000Z",
+      "sponsorName": "Epic Systems",
+      "assetType": "Live Webinar",
+      "speakers": [
+        { "firstName": "Linda", "lastName": "Nguyen", "jobTitle": "Director of Clinical Informatics", "companyName": "Mayo Clinic" },
+        { "firstName": "Priya", "lastName": "Sharma", "jobTitle": "Chief Medical Officer", "companyName": "Tenet Healthcare" }
+      ]
+    };
+
+    let currentAsset = HARDCODED_ASSET;
+
+    function getQueryParam(name) {
+      return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function renderAssetUI(asset) {
+      document.getElementById('asset-title').innerText = asset.name;
+      document.getElementById('asset-sponsor').innerText = asset.sponsorName;
+      document.getElementById('asset-description').innerText = asset.description;
+      document.getElementById('asset-type-text').innerText = asset.assetType;
+      
+      const speakerList = document.getElementById('speaker-list');
+      speakerList.innerHTML = asset.speakers.map(sp => `
+        <div class="speaker-card">
+          <div class="speaker-avatar">
+            <span class="speaker-avatar-init">${sp.firstName[0]}${sp.lastName[0]}</span>
+          </div>
+          <div class="speaker-details">
+            <span class="speaker-name">${sp.firstName} ${sp.lastName}</span>
+            <span class="speaker-title-text">${sp.jobTitle} · ${sp.companyName}</span>
+          </div>
+        </div>
+      `).join('');
+
+      const existing = localStorage.getItem(`signup_${asset.id}`);
+      if (existing) showSuccess(JSON.parse(existing));
+    }
+
+    function showSuccess(data) {
+      document.getElementById('reg-form-content').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      document.getElementById('conf-name').innerText = `${data.person.firstName} ${data.person.lastName}`;
+      document.getElementById('conf-email').innerText = data.person.email;
+      document.getElementById('related-section').classList.add('visible');
+      loadRelated();
+    }
+
+    async function loadRelated() {
+      try {
+        const res = await fetch('/assets');
+        const json = await res.json();
+        const related = json.data.filter(a => a.id !== currentAsset.id).slice(0, 3);
+        const grid = document.getElementById('related-grid');
+        grid.innerHTML = related.map(a => `
+          <a href="/signup.html?id=${a.id}" class="related-card">
+            <span class="related-eyebrow" style="font-size:9px;">${a.assetType}</span>
+            <p class="related-card-title">${a.name}</p>
+            <span style="font-size:11px; color:var(--bh-gray-500);">Presented by ${a.sponsorName}</span>
+          </a>
+        `).join('');
+      } catch (e) {}
+    }
+
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const person = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        jobTitle: document.getElementById('jobTitle').value,
+        companyName: document.getElementById('companyName').value
+      };
+      
+      try {
+        const res = await fetch(`/assets/${currentAsset.id}/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ person })
+        });
+        const result = await res.json();
+        localStorage.setItem(`signup_${currentAsset.id}`, JSON.stringify(result.data));
+        showSuccess(result.data);
+      } catch (err) {}
+    });
+
+    async function init() {
+      const id = getQueryParam('id');
+      if (id) {
+        document.getElementById('skeleton-screen').style.display = 'block';
+        try {
+          const res = await fetch(`/assets/${id}`);
+          const json = await res.json();
+          currentAsset = json.data;
+        } catch(e) {}
+        document.getElementById('skeleton-screen').style.display = 'none';
+        document.getElementById('asset-content').style.display = 'block';
+      } else {
+        document.getElementById('asset-content').style.display = 'block';
+      }
+      renderAssetUI(currentAsset);
+    }
+    init();
+  </script>
+</body>
+</html>

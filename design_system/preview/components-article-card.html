@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<link rel="stylesheet" href="_card.css">
+<style>
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .art { background: #fff; border: 1px solid var(--bh-gray-200); border-radius: 4px; overflow: hidden; display:flex; flex-direction:column; transition: box-shadow .15s ease; }
+  .art:hover { box-shadow: 0 4px 10px rgba(9,31,62,0.08), 0 2px 4px rgba(9,31,62,0.05); }
+  .cover { height: 110px; background: linear-gradient(135deg, #1E3A6D, #091F3E); position: relative; }
+  .cover.pink { background: #E8A4A8; }
+  .body { padding: 12px 14px 14px; }
+  .kicker { font-family: var(--font-sans); font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--bh-red-800); }
+  .h { font-family: var(--font-serif); font-weight: 700; font-size: 17px; line-height: 1.25; color: var(--bh-gray-900); margin: 6px 0 10px; text-wrap: balance; }
+  .by { font-family: var(--font-sans); font-size: 12px; color: var(--color-fg-subtle); }
+</style></head><body>
+<div class="card">
+  <div class="caption" style="margin-bottom:12px;">ARTICLE CARDS · Image top, kicker, serif headline, byline + relative time. 1px hairline border, 4px radius.</div>
+  <div class="grid">
+    <div class="art">
+      <div class="cover pink"></div>
+      <div class="body">
+        <div class="kicker">Featured</div>
+        <div class="h">Why 40% of hospitals are still losing money, according to CFOs</div>
+        <div class="by">By: Kelly Gooch · 2 days ago</div>
+      </div>
+    </div>
+    <div class="art">
+      <div class="cover"></div>
+      <div class="body">
+        <div class="kicker">Executive Moves</div>
+        <div class="h">UCI Health names chief AI officer</div>
+        <div class="by">By: Giles Bruce · 2 days ago</div>
+      </div>
+    </div>
+  </div>
+</div></body></html>

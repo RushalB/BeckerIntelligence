@@ -1,0 +1,220 @@
+[
+  {
+    "id": "5af0e596b3c7e95aaafe42e01222f91666354f9152238bcf443b2c4c4ac46cfa",
+    "name": "The Future of AI in Clinical Decision Support",
+    "description": "A live webinar exploring how AI-powered tools are transforming clinical decision-making at the bedside and reducing physician burnout.",
+    "executionDate": "2026-06-10T14:00:00.000Z",
+    "expirationDate": "2026-12-31",
+    "sponsorName": "Epic Systems",
+    "assetType": "Live Webinar",
+    "speakers": [
+      {
+        "id": "04d7bc0f2f0841afc8f7383a2525a2c5edb805625dbe1b117b70ecc3d3004911",
+        "firstName": "Linda",
+        "lastName": "Nguyen",
+        "jobTitle": "Director of Clinical Informatics",
+        "companyName": "Mayo Clinic",
+        "email": "linda.nguyen@mayoclinic.org"
+      },
+      {
+        "id": "3e3f5b026a07a80749963c72b259dc4a62f954a8ab20463fbb43d63f79788585",
+        "firstName": "Priya",
+        "lastName": "Sharma",
+        "jobTitle": "Chief Medical Officer",
+        "companyName": "Tenet Healthcare",
+        "email": "priya.sharma@tenethealth.com"
+      }
+    ],
+    "createdDate": "2026-04-01T09:00:00.000Z",
+    "createdBy": "admin@beckershealthcare.com",
+    "lastModifiedDate": "2026-04-15T11:30:00.000Z",
+    "lastModifiedBy": "admin@beckershealthcare.com"
+  },
+  {
+    "id": "f06de07ea2ec3e968986d3e66011213071b6f1c2457aefada4747475441891d4",
+    "name": "Revenue Cycle Optimization in a Post-Pandemic World",
+    "description": "An on-demand webinar detailing proven strategies for rebuilding revenue cycle performance after years of financial disruption.",
+    "expirationDate": "2026-09-30",
+    
+    "sponsorName": "Optum",
+    "assetType": "On-Demand Webinar",
+    "speakers": [
+      {
+        "id": "5425636ee47216d04b453c2d60f84de1589276243ce5ace7737540f72ee31dcd",
+        "firstName": "James",
+        "lastName": "Okafor",
+        "jobTitle": "VP of Revenue Cycle",
+        "companyName": "HCA Healthcare",
+        "email": "james.okafor@hcahealthcare.com"
+      }
+    ],
+    "createdDate": "2026-03-10T08:00:00.000Z",
+    "createdBy": "editor@beckershealthcare.com",
+    "lastModifiedDate": "2026-03-20T14:00:00.000Z",
+    "lastModifiedBy": "editor@beckershealthcare.com"
+  },
+  {
+    "id": "693799036391ac138c314b04f8984d2ccb8bc242ebb48c1ced88bce1af718e50",
+    "name": "Nursing Workforce Crisis: Retention Strategies That Work",
+    "description": "A whitepaper outlining evidence-based retention programs adopted by leading health systems to combat nursing shortages.",
+    "expirationDate": "2027-01-01",
+    "sponsorName": "AMN Healthcare",
+    "assetType": "Whitepaper",
+    "createdDate": "2026-02-14T10:00:00.000Z",
+    "createdBy": "admin@beckershealthcare.com",
+    "lastModifiedDate": "2026-04-01T09:45:00.000Z",
+    "lastModifiedBy": "editor@beckershealthcare.com"
+  },
+  {
+    "id": "1bccb3002b0a6f2811b93cf171db8bfa6fe3127d84a040bf6e91ff210847207a",
+    "name": "Supply Chain Resilience for Health Systems",
+    "description": "A podcast series examining how health system supply chain leaders are building redundancy and reducing dependency on single-source suppliers.",
+    "sponsorName": "Medline Industries",
+    "assetType": "on-demand podcast",
+    "speakers": [
+      {
+        "id": "dc4ca1162b21adcf7352eaa2426d7b4a88d22d9ba15bad1182085ffb1133e987",
+        "firstName": "Kevin",
+        "lastName": "Park",
+        "jobTitle": "Director of Supply Chain",
+        "companyName": "Intermountain Healthcare",
+        "email": "kevin.park@intermountain.org"
+      }
+    ],
+    "createdDate": "2026-01-20T07:30:00.000Z",
+    "createdBy": "editor@beckershealthcare.com",
+    "lastModifiedDate": "2026-02-05T16:00:00.000Z",
+    "lastModifiedBy": "editor@beckershealthcare.com"
+  },
+  {
+    "id": "078436ec028e3615ce43f0072501097c1a3440324b8356d017d17e80d7f8c7db",
+    "name": "CFO Strategies for Capital Investment in 2026",
+    "description": "A live webinar where health system CFOs share frameworks for prioritizing capital projects amid rising interest rates and tightening margins.",
+    "executionDate": "2026-07-22T13:00:00.000Z",
+    "expirationDate": "2026-12-31",
+    "sponsorName": "Kaufman Hall",
+    "assetType": "Live Webinar",
+    "speakers": [
+      {
+        "id": "7fd81655e44b35677461ceac3ecdfb7321f7a4af117e131e54afb8490938babb",
+        "firstName": "Robert",
+        "lastName": "Steinberg",
+        "jobTitle": "CFO",
+        "companyName": "Banner Health",
+        "email": "robert.steinberg@bannerhealth.com"
+      }
+    ],
+    "createdDate": "2026-05-01T08:00:00.000Z",
+    "createdBy": "admin@beckershealthcare.com",
+    "lastModifiedDate": "2026-05-08T10:00:00.000Z",
+    "lastModifiedBy": "admin@beckershealthcare.com"
+  },
+  {
+    "id": "864fd307dbf4fcc7c181dadb4c95158f54cd3347f27ef14aa49060425dae5bf6",
+    "name": "Improving Patient Experience Scores: A Data-Driven Approach",
+    "description": "An on-demand webinar covering how top-performing hospitals use real-time patient feedback data to drive service line improvements.",
+    "expirationDate": "2026-11-30",
+    "sponsorName": "Press Ganey",
+    "assetType": "On-Demand Webinar",
+    "speakers": [
+      {
+        "id": "6b04b13adff3e74281252a57dca2d1b887ebcfb199190da10c4dfc2324fe444e",
+        "firstName": "Fatima",
+        "lastName": "Al-Hassan",
+        "jobTitle": "Patient Experience Officer",
+        "companyName": "Cleveland Clinic",
+        "email": "fatima.alhassan@ccf.org"
+      }
+    ],
+    "createdDate": "2026-03-25T11:00:00.000Z",
+    "createdBy": "editor@beckershealthcare.com",
+    "lastModifiedDate": "2026-04-10T09:00:00.000Z",
+    "lastModifiedBy": "editor@beckershealthcare.com"
+  },
+  {
+    "id": "4f8481cec60a5e839543b96a3f617465f4fdf1133bfd8ea08041ce0f4e6e8c59",
+    "name": "EHR Optimization: Getting More Value from Your Investment",
+    "description": "A whitepaper detailing how health systems can reduce EHR-related friction for clinicians while improving documentation quality and compliance.",
+    "expirationDate": "2027-06-01",
+    "sponsorName": "Oracle Health",
+    "assetType": "Whitepaper",
+    "createdDate": "2026-01-05T08:00:00.000Z",
+    "createdBy": "admin@beckershealthcare.com",
+    "lastModifiedDate": "2026-03-01T14:00:00.000Z",
+    "lastModifiedBy": "admin@beckershealthcare.com"
+  },
+  {
+    "id": "d324fc1701ece864d28954f586d4a313109779b21cb3762a439dc4ffb4dc4e0a",
+    "name": "Behavioral Health Integration in Primary Care",
+    "description": "A podcast exploring how large health systems are embedding behavioral health services into primary care workflows to close gaps in whole-person care.",
+    "sponsorName": "Magellan Health",
+    "assetType": "on-demand podcast",
+    "speakers": [
+      {
+        "id": "8187b7d5291cbdb209c7e5cc8f3ec0992aff42255ba9b15a431e82590cf3907e",
+        "firstName": "Sarah",
+        "lastName": "Mitchell",
+        "jobTitle": "Chief Nursing Officer",
+        "companyName": "Ascension Health",
+        "email": "sarah.mitchell@ascensionhealth.org"
+      },
+      {
+        "id": "13c2327da0f60ca7f97d2d21a5dd9337ca30d2cf74f845cf058e5ab66e8ce822",
+        "firstName": "Angela",
+        "lastName": "Torres",
+        "jobTitle": "SVP of Operations",
+        "companyName": "Advocate Aurora Health",
+        "email": "angela.torres@aah.org"
+      }
+    ],
+    "createdDate": "2026-02-01T09:00:00.000Z",
+    "createdBy": "editor@beckershealthcare.com",
+    "lastModifiedDate": "2026-02-28T17:00:00.000Z",
+    "lastModifiedBy": "editor@beckershealthcare.com"
+  },
+  {
+    "id": "20daa36295eb84b020259bfbe1730a145e16df059e2ce52c0f102df38c9b687b",
+    "name": "Cybersecurity Preparedness for Health Systems",
+    "description": "A live webinar on how health system IT leaders are hardening defenses against ransomware and insider threats without disrupting clinical operations.",
+    "executionDate": "2026-08-05T15:00:00.000Z",
+    "expirationDate": "2027-01-31",
+    "sponsorName": "CrowdStrike",
+    "assetType": "Live Webinar",
+    "speakers": [
+      {
+        "id": "5158c9d58be2285201b3fc2020a96fe101b5f362df62eee7e57e74c1f4e5a332",
+        "firstName": "Marcus",
+        "lastName": "Chen",
+        "jobTitle": "Health IT Director",
+        "companyName": "Kaiser Permanente",
+        "email": "marcus.chen@kp.org"
+      }
+    ],
+    "createdDate": "2026-05-05T10:00:00.000Z",
+    "createdBy": "admin@beckershealthcare.com",
+    "lastModifiedDate": "2026-05-10T12:00:00.000Z",
+    "lastModifiedBy": "admin@beckershealthcare.com"
+  },
+  {
+    "id": "fc83af2eae2b09b79331a127f1233d9b42fb65f15ed26240e6163f6bf1d1888f",
+    "name": "Operational Efficiency Through Lean Management in Hospitals",
+    "description": "A whitepaper examining how health systems are applying lean principles to reduce waste, shorten patient throughput times, and improve staff satisfaction.",
+    "expirationDate": "2026-10-15",
+    "sponsorName": "Vizient",
+    "assetType": "Whitepaper",
+    "speakers": [
+      {
+        "id": "9163dbc091707b3caa9e82f2bd9633207c1c9d056230f07912d0538acb7d95f8",
+        "firstName": "Derek",
+        "lastName": "Holloway",
+        "jobTitle": "Hospital Administrator",
+        "companyName": "CommonSpirit Health",
+        "email": "derek.holloway@commonspirit.org"
+      }
+    ],
+    "createdDate": "2026-04-12T08:30:00.000Z",
+    "createdBy": "editor@beckershealthcare.com",
+    "lastModifiedDate": "2026-05-01T11:00:00.000Z",
+    "lastModifiedBy": "admin@beckershealthcare.com"
+  }
+]
