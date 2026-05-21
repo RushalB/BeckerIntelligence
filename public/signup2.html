@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register | Becker's Hospital Review</title>
-  
+  <title>Register | Meridian Health Intelligence</title>
+
   <!-- Design System Fonts & Global CSS -->
   <link rel="stylesheet" href="/design_system/colors_and_type.css">
   <link rel="stylesheet" href="/design_system/ui_kits/bhr-web/kit.css">
-  
-  <!-- Page Specific Style Sheet -->
-  <link rel="stylesheet" href="/signup.css">
+
+  <!-- Meridian Brand + Page Styles -->
+  <link rel="stylesheet" href="/signup2.css">
 </head>
 <body>
 
@@ -18,13 +18,24 @@
   <header>
     <div style="background:#fff; border-bottom: 1px solid var(--bh-gray-200);">
       <div class="bh-masthead" style="border-bottom:none;">
-        <a href="/" style="line-height:1; text-decoration:none;">
-          <img src="/BeckerIntelligenceLogo.svg" alt="Becker's Intelligence" style="height:36px; display:block;">
+        <a class="meridian-logo" href="/">
+          <span class="logo-rule"></span>
+          <span class="logo-name">Meridian</span>
+          <span class="logo-sub">Health Intelligence</span>
         </a>
         <div class="bh-masthead__spacer"></div>
-        <button class="bh-btn bh-btn--primary" onclick="alert('Thank you for subscribing to Becker\'s!')">Subscribe</button>
+        <button class="bh-btn bh-btn--primary" onclick="alert('Subscribe to Meridian\'s daily intelligence briefing.')">Subscribe</button>
       </div>
     </div>
+    <nav class="bh-sectnav">
+      <a href="/" class="bh-sectnav__item">Home</a>
+      <a href="/listing.html" class="bh-sectnav__item">All Assets</a>
+      <a href="/listing.html?type=Webinar" class="bh-sectnav__item">Webinars</a>
+      <a href="/listing.html?type=Whitepaper" class="bh-sectnav__item">Whitepapers</a>
+      <a href="#" class="bh-sectnav__item">Clinical</a>
+      <a href="#" class="bh-sectnav__item">Resources</a>
+      <a href="#" class="bh-sectnav__item">Events</a>
+    </nav>
   </header>
 
   <!-- Main Content Page -->
@@ -34,7 +45,7 @@
       <a href="/listing.html" class="bh-back-link" id="back-link">&#8592; Back to listing</a>
 
       <div class="detail-grid">
-        
+
         <!-- Left Panel: Asset Details -->
         <section class="asset-info-panel">
 
@@ -57,28 +68,40 @@
           <!-- Actual content -->
           <div id="asset-content" style="display:none;">
 
-            <!-- Kicker Tag / Badge -->
+            <!-- Kicker Badge -->
             <span class="asset-badge" id="asset-type-badge">
               <svg viewBox="0 0 24 24">
                 <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H3V4h18v12z"/>
               </svg>
-              <!-- TODO: use proper icon for webinar from design_system/assets/icons/webinars.svg -->
               <span id="asset-type-text">Live Webinar</span>
             </span>
 
             <!-- Title -->
             <h1 class="asset-title" id="asset-title">The future of AI in clinical decision support</h1>
-          
+
             <!-- Metas -->
             <div class="asset-meta">
               <div class="meta-item">
+                <span class="meta-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                  </svg>
+                </span>
                 <span>Presented by <strong class="sponsor-name" id="asset-sponsor">Epic Systems</strong></span>
               </div>
-            
-              <div class="meta-item" id="asset-date-row">
-                <span id="asset-date-string">Published: June 2026</span>
+
+              <div class="meta-item">
+                <span class="meta-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                </span>
+                <span id="asset-date-string">Wednesday, June 10, 2026 at 2:00 PM UTC</span>
               </div>
-              <div class="meta-item">12 min read</div>
             </div>
 
             <!-- Cover Illustration -->
@@ -96,28 +119,20 @@
             </p>
 
             <!-- Featured Speakers -->
-            <div id="speakers-section" style="margin-top:32px; display:none;">
-              <div class="sidebar-header">Expert Contributors</div>
-              <div class="speaker-list" id="speaker-list">
-                <!-- Speakers loaded dynamically -->
-              </div>
+            <div id="speakers-section" style="margin-top:32px;">
+              <div class="sidebar-header">Featured Speakers</div>
+              <div class="speaker-list" id="speaker-list"></div>
             </div>
 
           </div>
         </section>
 
-        <!-- Right Panel: Sidebar Column -->
+        <!-- Right Panel: Sidebar -->
         <div class="sidebar-column">
-          <!-- Registration Card -->
           <section class="sidebar-card" id="reg-card">
             <div id="reg-form-content">
               <div class="reg-header">
-                <h3 class="reg-title">
-                  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:var(--bh-navy-900);vertical-align:-2px;margin-right:8px;">
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>Request Access
-                </h3>
+                <h3 class="reg-title">Register to Access</h3>
                 <p class="reg-text">Complete the form to access this content.</p>
               </div>
 
@@ -166,18 +181,7 @@
                 <div><strong>Email:</strong> <span id="conf-email"></span></div>
               </div>
               <p style="font-size:11px; color:var(--bh-gray-500); line-height:1.4;">A confirmation has been sent to your email.</p>
-
-              <!-- Primary CTA — label and action set by JS based on asset type -->
-              <div id="success-cta-wrap" style="display:none; margin-top:20px; padding-top:16px; border-top:1px solid var(--bh-gray-200);">
-                <button id="primary-cta-btn" class="bh-btn bh-btn--primary btn-submit"></button>
-              </div>
             </div>
-          </section>
-
-          <!-- Sidebar related content — revealed after registration -->
-          <section class="sidebar-card sidebar-related" id="sidebar-related" style="display:none;">
-            <div class="sidebar-header">Related content</div>
-            <div id="sidebar-related-list"></div>
           </section>
         </div>
 
@@ -185,31 +189,41 @@
     </div>
   </main>
 
+  <!-- Related Content -->
+  <section class="related-section" id="related-section">
+    <div class="bh-container">
+      <p class="related-eyebrow">More from Meridian</p>
+      <h2 class="related-heading">Related content</h2>
+      <div class="related-grid" id="related-grid"></div>
+    </div>
+  </section>
+
   <footer class="bh-footer">
     <div class="bh-footer__inner">
       <div class="bh-footer__brand">
-        <a href="/" style="line-height:1; text-decoration:none; display:inline-block;">
-          <img src="/BeckerIntelligenceLogo.svg" alt="Becker's Intelligence" style="height:36px; display:block; filter: brightness(0) invert(1);">
+        <a class="meridian-logo meridian-logo--footer" href="/">
+          <span class="logo-rule"></span>
+          <span class="logo-name">Meridian</span>
+          <span class="logo-sub">Health Intelligence</span>
         </a>
-        <h4>Contact Us</h4>
+        <h4 style="margin-top:16px;">Contact Us</h4>
         <a class="bh-footer__phone" href="tel:18004172035">1-800-417-2035</a>
-        <a class="bh-footer__mail" href="mailto:becker@beckershealthcare.com">becker@beckershealthcare.com</a>
+        <a class="bh-footer__mail" href="mailto:hello@meridianhealth.com">hello@meridianhealth.com</a>
       </div>
       <div class="bh-footer__col">
         <h4>About</h4>
         <ul>
-          <li><a href="#">About Becker's</a></li>
+          <li><a href="#">About Meridian</a></li>
           <li><a href="#">Privacy Policy</a></li>
           <li><a href="#">Terms of Use</a></li>
         </ul>
       </div>
     </div>
     <div class="bh-footer__legal">
-      <span>Copyright © 2026 Becker's Intelligence. All Rights Reserved.</span>
+      <span>Copyright &copy; 2026 Meridian Health Intelligence. All Rights Reserved.</span>
     </div>
   </footer>
 
-  <!-- Page Specific Script -->
   <script src="/signup.js" defer></script>
 </body>
 </html>
