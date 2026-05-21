@@ -185,7 +185,7 @@ body {
   overflow: hidden;
 }
 
-/* Stock photo background image */
+/* Stock photo — absolutely positioned so it doesn't push flex children */
 .cover-bg-img {
   position: absolute;
   inset: 0;
@@ -197,20 +197,16 @@ body {
   display: block;
 }
 
-/* Dark navy gradient overlay on top of photo */
+/* Dark navy gradient overlay */
 .asset-cover-illustration::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(9, 31, 62, 0.78) 0%,
-    rgba(9, 31, 62, 0.52) 100%
-  );
+  background: linear-gradient(135deg, rgba(9,31,62,0.78) 0%, rgba(9,31,62,0.52) 100%);
   z-index: 1;
 }
 
-/* Type label badge bottom-left of cover */
+/* Type label bottom-left */
 .cover-type-label {
   position: absolute;
   bottom: 16px;
@@ -220,7 +216,7 @@ body {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255,255,255,0.75);
   z-index: 3;
 }
 

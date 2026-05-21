@@ -47,24 +47,25 @@ body {
 
 /* Page Hero Banner — Sophisticated Executive Theme */
 .listing-hero {
-  background: var(--bh-navy-900);
+  background: url('/clean_minimalist_hero_background_for_a_healthcare_technology_brand._subtle.png') center center / cover no-repeat;
   color: #fff;
   padding: 48px 0;
   border-bottom: 4px solid var(--bh-red-800);
   margin-bottom: 32px;
   position: relative;
-  overflow: hidden;
 }
 
 .listing-hero::before {
   content: '';
   position: absolute;
-  width: 150%;
-  height: 150%;
-  background: radial-gradient(circle, rgba(154,27,42,0.08) 0%, transparent 60%);
-  top: -25%;
-  left: -25%;
+  inset: 0;
+  background: rgba(9, 31, 62, 0.3);
   pointer-events: none;
+}
+
+.listing-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .listing-hero h1 {
@@ -82,6 +83,7 @@ body {
   max-width: 720px;
   line-height: 1.6;
 }
+
 
 /* Full-Width Search & Filters Layout */
 .catalog-layout {
@@ -375,11 +377,6 @@ body {
   position: relative;
 }
 
-.asset-row:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--bh-navy-300);
-  transform: translateY(-1px);
-}
 
 
 
@@ -474,6 +471,11 @@ body {
   background: none;
   border: none;
   padding: 0;
+}
+
+.tag-badge svg {
+  color: var(--bh-navy-900);
+  flex-shrink: 0;
 }
 
 .tag-badge.type-webinar,
@@ -885,6 +887,10 @@ body {
     display: none !important;
   }
 }
+
+
+
+
 
 
 
