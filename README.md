@@ -149,12 +149,14 @@ The sign-up flow is broken into **two steps**. Users whose information we alread
 ### Intelligence Hub
 The main content discovery area gives users multiple filtering options alongside a curated list of popular topics for quick navigation. Featured assets are randomized to surface variety. Each asset includes a **category tag** so users immediately understand what type of content they're accessing — this is a required UX element given how diverse the asset types are.
 
-### Social Proof & Engagement Signals
-I added **key insights and view counts** to each asset. This lets users quickly gauge how many people have engaged with a piece of content and whether it's worth their time — a trust signal that mirrors how executives evaluate information in other contexts.
 
 ---
 
-## Tradeoffs & Considerations
+## Tradeoffs & Future Considerations
 
 - **Multilingual support** was a priority I wanted to include. This type of brand serves global audiences, and accessibility across languages matters — it's something to build toward as the product scales.
-- **Vanilla HTML/CSS/JS** was the right call for speed of execution at this scope. As the platform grows in content volume and interactivity, migrating to React will be the natural next step. 
+- **Vanilla HTML/CSS/JS** was the right call for speed of execution at this scope. As the platform grows in content volume and interactivity, migrating to React will be the natural next step.
+- **Social Proof & Engagement Signals
+I want to add **key insights and view counts** to each asset. This lets users quickly gauge how many people have engaged with a piece of content and whether it's worth their time — a trust signal that mirrors how executives evaluate information in other contexts.
+
+
