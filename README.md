@@ -119,12 +119,42 @@ This user is extremely busy and values speed and clarity. They consume quick, hi
 - Migrate to React for better scalability and maintainability as the platform grows
 
 
-## Raw
-I made a persona for the user who is VP of Strategic Operations & Innovation at a Hospital.
-His core needs are 
-Improve staffing efficiency
-Reduce burnout
-Optimize patient throughput
-Learn operational best practices
-He is a busy person and want access to the content quickly, He consumes podcast,articles and attends webinar for getting this information   I choose my brand becker intelligence to be sub brand of of the becker health care ecosystem. This is a brand that provides intelligence which is essentially content for people who are executives are want to improve on things like operations , patient experience ehr tech etc. to optimize their workflow. Our brand through gather high quality content from various sources sometimes even sponsored and makes it available to these people. We take their email id name org and job title so as to make them a potential lead.  I choose to use beckers token but gave it more executive friendly aesthetic.Execs are busy people and dont to get everything fast so the user experience is quick, direct and to the point. but maintained becers overall brand image 
-I specifcally featured speakers on the signup page because users will trust the speaker/contributor of the asset and at times even if they dont care about the subject matter the are likely to access that content, similar to research papers. So I gave them more realestate on the page.  I broke the signup page into 2 steps so user whose information we already have can quickly access the content with just their email id and we already have them as a lead.Once user is in they can also view related content  The intellience hub which is the main area for finding relevant assets, I gave the user multiple options to filter and also have a list of some popular topics they may want to search by along with featured assets (which are randomized for now) . I also added a category tag to the article( this was generated but my design requires user to know what the asset is about  Tradeoffs: I wanted to add accesibility because this type of a brand will have global audiences so I wanted to add multi lingual support.  An extremely important thing I was to addend key inisights and views of a particular asset. So users can know how many people trusted this and if it is worth their time to read I kept the landing page extremley simple because the kind of executives who would land here already know why they are here and already trust the becker health brand. I used the second brand color very subtly. I had to build it in vanilla html css js to buld quicky and react didnt make sense for such a small project.but as this grows it is better to shift. 
+## Raw (human written thought -- i asked AI to format it for me, this is the raw version)
+# Becker Intelligence — Design Case Study
+
+## Overview
+
+I designed a persona for the primary user: a VP of Strategic Operations & Innovation at a hospital. His core needs center around improving staffing efficiency, reducing burnout, optimizing patient throughput, and learning operational best practices. He's a busy executive who consumes content through podcasts, articles, and webinars.
+
+---
+
+## Brand
+
+I chose **Becker Intelligence** as a sub-brand within the Becker Healthcare ecosystem. The brand provides curated intelligence — content for executives looking to improve operations, patient experience, EHR tech, and workflow optimization. We aggregate high-quality content from various sources (including sponsored content) and make it available to this audience. In exchange, we collect name, email, organization, and job title to qualify them as leads.
+
+I used Becker's existing token system but gave it a more executive-friendly aesthetic — clean, direct, and authoritative without being overwhelming.
+
+---
+
+## Key Design Decisions
+
+### Landing Page
+I kept the landing page extremely minimal. Executives who land here already know why they're here and already trust the Becker Healthcare brand. There's no need to over-explain. The secondary brand color is used subtly to maintain brand consistency without distraction.
+
+### Sign-Up Flow — Speaker-First Strategy
+I featured speakers and contributors prominently on the sign-up page. Executives trust the person behind the content, not just the topic. Much like academic research papers, a recognized name drives access — even if the subject matter isn't the user's primary focus. Giving speakers more real estate on the page directly supports conversion.
+
+The sign-up flow is broken into **two steps**. Users whose information we already have can access content by entering just their email, instantly qualifying as a lead without friction.
+
+### Intelligence Hub
+The main content discovery area gives users multiple filtering options alongside a curated list of popular topics for quick navigation. Featured assets are randomized to surface variety. Each asset includes a **category tag** so users immediately understand what type of content they're accessing — this is a required UX element given how diverse the asset types are.
+
+### Social Proof & Engagement Signals
+I added **key insights and view counts** to each asset. This lets users quickly gauge how many people have engaged with a piece of content and whether it's worth their time — a trust signal that mirrors how executives evaluate information in other contexts.
+
+---
+
+## Tradeoffs & Considerations
+
+- **Multilingual support** was a priority I wanted to include. This type of brand serves global audiences, and accessibility across languages matters — it's something to build toward as the product scales.
+- **Vanilla HTML/CSS/JS** was the right call for speed of execution at this scope. As the platform grows in content volume and interactivity, migrating to React will be the natural next step. 
