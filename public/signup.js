@@ -1,5 +1,15 @@
 /* signup.js — Registration form logic, API wiring, success state, sidebar related */
 
+// ── Stock cover images per content type (Unsplash) ───────────────────────────
+const COVER_IMAGES = {
+  'Live Webinar':      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&h=440&auto=format&fit=crop&q=80',
+  'On-Demand Webinar': 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=900&h=440&auto=format&fit=crop&q=80',
+  'Whitepaper':        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&h=440&auto=format&fit=crop&q=80',
+  'on-demand podcast': 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=900&h=440&auto=format&fit=crop&q=80',
+};
+// Fallback for any unrecognised type
+const COVER_FALLBACK = 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=900&h=440&auto=format&fit=crop&q=80';
+
 // ── CTA copy per content type ─────────────────────────────────────────────────
 // PRIMARY_CTA: shown inside the success card after the user registers for THIS asset
 const PRIMARY_CTA = {
@@ -124,6 +134,25 @@ function renderAssetUI(asset) {
     dateRow.style.display = '';
   } else {
     dateRow.style.display = 'none';
+  }
+
+  // Cover stock image — swap in type-specific photo
+  const coverEl = document.querySelector('.asset-cover-illustration');
+  if (coverEl) {
+    // Remove any previously injected elements (safe for repeat calls)
+    coverEl.querySelectorAll('.cover-bg-img, .cover-type-label').forEach(el => el.remove());
+
+    const img = document.createElement('img');
+    img.className = 'cover-bg-img';
+    img.src = COVER_IMAGES[asset.assetType] || COVER_FALLBACK;
+    img.alt = '';
+    img.loading = 'eager';
+    coverEl.insertBefore(img, coverEl.firstChild);
+
+    const typeLabel = document.createElement('span');
+    typeLabel.className = 'cover-type-label';
+    typeLabel.textContent = asset.assetType;
+    coverEl.appendChild(typeLabel);
   }
 
   // Speakers — hide section if none
