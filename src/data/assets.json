@@ -7,6 +7,8 @@
     "expirationDate": "2026-12-31",
     "sponsorName": "Epic Systems",
     "assetType": "Live Webinar",
+    "category": "Clinical / Care Delivery",
+    "tags": ["AI Decision Support", "Clinical IT", "Artificial Intelligence"],
     "speakers": [
       {
         "id": "04d7bc0f2f0841afc8f7383a2525a2c5edb805625dbe1b117b70ecc3d3004911",
@@ -35,9 +37,10 @@
     "name": "Revenue Cycle Optimization in a Post-Pandemic World",
     "description": "An on-demand webinar detailing proven strategies for rebuilding revenue cycle performance after years of financial disruption.",
     "expirationDate": "2026-09-30",
-    
     "sponsorName": "Optum",
     "assetType": "On-Demand Webinar",
+    "category": "Finance / Revenue",
+    "tags": ["Revenue Cycle", "Financial Recovery", "Optimization"],
     "speakers": [
       {
         "id": "5425636ee47216d04b453c2d60f84de1589276243ce5ace7737540f72ee31dcd",
@@ -60,6 +63,8 @@
     "expirationDate": "2027-01-01",
     "sponsorName": "AMN Healthcare",
     "assetType": "Whitepaper",
+    "category": "Workforce",
+    "tags": ["Workforce Crisis", "Nursing Retention", "HR Strategies"],
     "createdDate": "2026-02-14T10:00:00.000Z",
     "createdBy": "admin@beckershealthcare.com",
     "lastModifiedDate": "2026-04-01T09:45:00.000Z",
@@ -71,6 +76,8 @@
     "description": "A podcast series examining how health system supply chain leaders are building redundancy and reducing dependency on single-source suppliers.",
     "sponsorName": "Medline Industries",
     "assetType": "on-demand podcast",
+    "category": "Operations",
+    "tags": ["Supply Chain Resilience", "Resource Management", "Redundancy"],
     "speakers": [
       {
         "id": "dc4ca1162b21adcf7352eaa2426d7b4a88d22d9ba15bad1182085ffb1133e987",
@@ -94,6 +101,8 @@
     "expirationDate": "2026-12-31",
     "sponsorName": "Kaufman Hall",
     "assetType": "Live Webinar",
+    "category": "Finance / Revenue",
+    "tags": ["CFO Strategies", "Capital Projects", "Tightening Margins"],
     "speakers": [
       {
         "id": "7fd81655e44b35677461ceac3ecdfb7321f7a4af117e131e54afb8490938babb",
@@ -116,6 +125,8 @@
     "expirationDate": "2026-11-30",
     "sponsorName": "Press Ganey",
     "assetType": "On-Demand Webinar",
+    "category": "Patient Experience",
+    "tags": ["Patient Experience", "Satisfaction Data", "Data-Driven Care"],
     "speakers": [
       {
         "id": "6b04b13adff3e74281252a57dca2d1b887ebcfb199190da10c4dfc2324fe444e",
@@ -138,6 +149,8 @@
     "expirationDate": "2027-06-01",
     "sponsorName": "Oracle Health",
     "assetType": "Whitepaper",
+    "category": "Technology / IT",
+    "tags": ["EHR Optimization", "Digital Health", "Clinician Friction"],
     "createdDate": "2026-01-05T08:00:00.000Z",
     "createdBy": "admin@beckershealthcare.com",
     "lastModifiedDate": "2026-03-01T14:00:00.000Z",
@@ -149,6 +162,8 @@
     "description": "A podcast exploring how large health systems are embedding behavioral health services into primary care workflows to close gaps in whole-person care.",
     "sponsorName": "Magellan Health",
     "assetType": "on-demand podcast",
+    "category": "Clinical / Care Delivery",
+    "tags": ["Behavioral Health Integration", "Primary Care", "Whole-Person Care"],
     "speakers": [
       {
         "id": "8187b7d5291cbdb209c7e5cc8f3ec0992aff42255ba9b15a431e82590cf3907e",
@@ -180,6 +195,8 @@
     "expirationDate": "2027-01-31",
     "sponsorName": "CrowdStrike",
     "assetType": "Live Webinar",
+    "category": "Technology / IT",
+    "tags": ["Cybersecurity", "Ransomware Defense", "IT Hardening"],
     "speakers": [
       {
         "id": "5158c9d58be2285201b3fc2020a96fe101b5f362df62eee7e57e74c1f4e5a332",
@@ -202,6 +219,8 @@
     "expirationDate": "2026-10-15",
     "sponsorName": "Vizient",
     "assetType": "Whitepaper",
+    "category": "Operations",
+    "tags": ["Lean Hospital Management", "Efficiency", "Waste Reduction"],
     "speakers": [
       {
         "id": "9163dbc091707b3caa9e82f2bd9633207c1c9d056230f07912d0538acb7d95f8",

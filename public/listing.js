@@ -1,48 +1,5 @@
 /* listing.js — Dynamic content rendering, filtering, sorting, and sidebar population for BHR Intelligence Hub */
-
-// Asset Category & Topic Tag Mapping (maps the 10 catalog resources to executive domains)
-const ASSET_METADATA_MAP = {
-  "5af0e596b3c7e95aaafe42e01222f91666354f9152238bcf443b2c4c4ac46cfa": {
-    category: "Clinical / Care Delivery",
-    tags: ["AI Decision Support", "Clinical IT", "Artificial Intelligence"]
-  },
-  "f06de07ea2ec3e968986d3e66011213071b6f1c2457aefada4747475441891d4": {
-    category: "Finance / Revenue",
-    tags: ["Revenue Cycle", "Financial Recovery", "Optimization"]
-  },
-  "693799036391ac138c314b04f8984d2ccb8bc242ebb48c1ced88bce1af718e50": {
-    category: "Workforce",
-    tags: ["Workforce Crisis", "Nursing Retention", "HR Strategies"]
-  },
-  "1bccb3002b0a6f2811b93cf171db8bfa6fe3127d84a040bf6e91ff210847207a": {
-    category: "Operations",
-    tags: ["Supply Chain Resilience", "Resource Management", "Redundancy"]
-  },
-  "078436ec028e3615ce43f0072501097c1a3440324b8356d017d17e80d7f8c7db": {
-    category: "Finance / Revenue",
-    tags: ["CFO Strategies", "Capital Projects", "Tightening Margins"]
-  },
-  "864fd307dbf4fcc7c181dadb4c95158f54cd3347f27ef14aa49060425dae5bf6": {
-    category: "Patient Experience",
-    tags: ["Patient Experience", "Satisfaction Data", "Data-Driven Care"]
-  },
-  "4f8481cec60a5e839543b96a3f617465f4fdf1133bfd8ea08041ce0f4e6e8c59": {
-    category: "Technology / IT",
-    tags: ["EHR Optimization", "Digital Health", "Clinician Friction"]
-  },
-  "d324fc1701ece864d28954f586d4a313109779b21cb3762a439dc4ffb4dc4e0a": {
-    category: "Clinical / Care Delivery",
-    tags: ["Behavioral Health Integration", "Primary Care", "Whole-Person Care"]
-  },
-  "20daa36295eb84b020259bfbe1730a145e16df059e2ce52c0f102df38c9b687b": {
-    category: "Technology / IT",
-    tags: ["Cybersecurity", "Ransomware Defense", "IT Hardening"]
-  },
-  "fc83af2eae2b09b79331a127f1233d9b42fb65f15ed26240e6163f6bf1d1888f": {
-    category: "Operations",
-    tags: ["Lean Hospital Management", "Efficiency", "Waste Reduction"]
-  }
-};
+/* Depends on: shared.js (CTA_MAP, TYPE_ICONS, getBadgeIcon, formatCardDate) */
 
 // State Store
 let allAssets = [];
@@ -100,32 +57,6 @@ function loadSessionFilters() {
   }
 }
 
-// SVG Icons Map for Asset types
-const TYPE_ICONS = {
-  'Webinar': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>`,
-  'Whitepaper': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>`,
-  'Podcast': `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px; height:14px; vertical-align:middle; display:inline-block;"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v1a7 7 0 0 1-14 0v-1"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`
-};
-
-// Helper to format Date string
-function formatCardDate(dateStr, typeText) {
-  if (!dateStr) return 'Available On Demand';
-  
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr;
-  
-  const isLive = typeText.toLowerCase().includes('live webinar') || typeText.toLowerCase().includes('event');
-  
-  const options = { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  };
-  
-  const prefix = isLive ? 'Goes Live:' : 'Released:';
-  return `${prefix} ${d.toLocaleDateString('en-US', options)}`;
-}
-
 // Helper to check local registry state
 function hasAccess(assetId) {
   return localStorage.getItem(`signup_${assetId}`) !== null;
@@ -146,12 +77,12 @@ function renderFeaturedSidebar() {
   const featuredAssets = allAssets.filter(a => featuredIds.includes(a.id));
   
   sidebarList.innerHTML = featuredAssets.map((asset, index) => {
-    const meta = ASSET_METADATA_MAP[asset.id] || { category: "Intelligence" };
+    const category = asset.category || 'Intelligence';
     return `
       <a href="/signup.html?id=${asset.id}" class="featured-item">
         <span class="featured-num">0${index + 1}</span>
         <div class="featured-item-body">
-          <span class="featured-meta">${meta.category}</span>
+          <span class="featured-meta">${category}</span>
           <span class="featured-title">${asset.name}</span>
         </div>
       </a>
@@ -165,14 +96,17 @@ function renderSidebarAccessList() {
   const list = document.getElementById('viewed-content-list');
   if (!list) return;
 
-  // Find the most recently stored signup key
+  // Find the signup entry with the most recent lastReviewedAt timestamp
   let lastKey = null;
+  let latestTime = 0;
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i);
-    if (key && key.startsWith('signup_')) {
-      lastKey = key;
-      break; // take the first one found; order reflects insertion for our use case
-    }
+    if (!key || !key.startsWith('signup_')) continue;
+    try {
+      const entry = JSON.parse(localStorage.getItem(key));
+      const t = entry?.lastReviewedAt ? new Date(entry.lastReviewedAt).getTime() : 0;
+      if (t > latestTime) { latestTime = t; lastKey = key; }
+    } catch (_) {}
   }
 
   if (!lastKey) {
@@ -290,9 +224,8 @@ function applyFiltersAndSort() {
   if (searchQuery.trim() !== '') {
     const q = searchQuery.toLowerCase().trim();
     filteredAssets = filteredAssets.filter(asset => {
-      const meta = ASSET_METADATA_MAP[asset.id] || { category: "", tags: [] };
-      const categoryMatch = meta.category.toLowerCase().includes(q);
-      const tagsMatch = meta.tags.some(tag => tag.toLowerCase().includes(q));
+      const categoryMatch = (asset.category || '').toLowerCase().includes(q);
+      const tagsMatch = (asset.tags || []).some(tag => tag.toLowerCase().includes(q));
 
       return (
         asset.name.toLowerCase().includes(q) ||
@@ -352,13 +285,12 @@ function updatePillCounts() {
   // how many of that type match the current search query
   const q = searchQuery.trim().toLowerCase();
   const searchPool = q === '' ? allAssets : allAssets.filter(asset => {
-    const meta = ASSET_METADATA_MAP[asset.id] || { category: '', tags: [] };
     return (
       asset.name.toLowerCase().includes(q) ||
       asset.sponsorName.toLowerCase().includes(q) ||
       (asset.description || '').toLowerCase().includes(q) ||
-      meta.category.toLowerCase().includes(q) ||
-      meta.tags.some(t => t.toLowerCase().includes(q))
+      (asset.category || '').toLowerCase().includes(q) ||
+      (asset.tags || []).some(t => t.toLowerCase().includes(q))
     );
   });
 
@@ -430,11 +362,9 @@ function renderCatalogGrid() {
       badgeIcon = TYPE_ICONS['Podcast'];
     }
 
-    // Load category and sub-topic tags
-    const meta = ASSET_METADATA_MAP[asset.id] || { 
-      category: "Resource / Briefing", 
-      tags: ["Intelligence"] 
-    };
+    // category and tags come directly from the API response
+    const assetCategory = asset.category || 'Resource / Briefing';
+    const assetTags     = asset.tags     || [];
 
     const userViewed = hasAccess(asset.id);
     const actionBtnText = userViewed ? 'View Content' : 'Continue to Content &rarr;';
@@ -466,7 +396,7 @@ function renderCatalogGrid() {
         
         <div class="row-footer">
           <div class="row-tags">
-            ${meta.tags.map(tag => `<span class="tag-topic">${tag}</span>`).join('')}
+            ${assetTags.map(tag => `<span class="tag-topic">${tag}</span>`).join('')}
           </div>
           
           <div class="row-actions">

@@ -13,6 +13,8 @@ export interface LeadGenAsset {
   expirationDate?: Date;
   sponsorName: string;
   assetType: AssetType;
+  category: string;
+  tags: string[];
   speakers?: Person[];
   createdDate: Date;
   createdBy: string;

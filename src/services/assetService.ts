@@ -1,7 +1,21 @@
+import fs from "fs";
+import path from "path";
 import { LeadGenAsset, Person, SignUpPayload } from "../types";
 import { hashPersonId, hashSignUpPayloadId } from "../utils/hashIds";
 import assetsData from "../data/assets.json";
 import signupsData from "../data/signups.json";
+
+const SIGNUPS_PATH = path.resolve(__dirname, "../data/signups.json");
+
+function persistSignups(data: SignUpPayload[]): void {
+  try {
+    fs.writeFileSync(SIGNUPS_PATH, JSON.stringify(data, null, 2), "utf-8");
+    console.info(`[assetService] persistSignups: wrote ${data.length} signups to disk`);
+  } catch (err) {
+    // Read-only filesystem (e.g. Vercel production) — in-memory only, log and continue
+    console.warn("[assetService] persistSignups: could not write to disk (read-only FS), registration held in memory only");
+  }
+}
 
 const assets: LeadGenAsset[] = assetsData as unknown as LeadGenAsset[];
 const signups: SignUpPayload[] = signupsData as unknown as SignUpPayload[];
@@ -60,5 +74,6 @@ export async function signUpForAsset(
 
   signups.push(signup);
   console.info(`[assetService] signUpForAsset: created signup id=${signup.id} for person id=${resolvedPerson.id} on assetId=${assetId}`);
+  persistSignups(signups);
   return signup;
 }

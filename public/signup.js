@@ -73,6 +73,8 @@ const FALLBACK_ASSET = {
   executionDate: '2026-06-10T14:00:00.000Z',
   sponsorName: 'Epic Systems',
   assetType: 'Live Webinar',
+  category: 'Clinical / Care Delivery',
+  tags: ['AI Decision Support', 'Clinical IT', 'Artificial Intelligence'],
   speakers: [
     { firstName: 'Linda', lastName: 'Nguyen', jobTitle: 'Director of Clinical Informatics', companyName: 'Mayo Clinic' },
     { firstName: 'Priya', lastName: 'Sharma',  jobTitle: 'Chief Medical Officer',            companyName: 'Tenet Healthcare' },
@@ -235,9 +237,14 @@ function renderAssetUI(asset) {
     speakersSection.style.display = 'none';
   }
 
-  // If already registered on this device, restore success state immediately
+  // If already registered on this device, restore success state and refresh timestamp
   const saved = localStorage.getItem(`signup_${asset.id}`);
-  if (saved) showSuccess(JSON.parse(saved));
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    parsed.lastReviewedAt = new Date().toISOString();
+    localStorage.setItem(`signup_${asset.id}`, JSON.stringify(parsed));
+    showSuccess(parsed);
+  }
 }
 
 // ── Success state ─────────────────────────────────────────────────────────────
@@ -246,6 +253,10 @@ function showSuccess(data) {
   document.getElementById('success-state').style.display    = 'block';
   document.getElementById('conf-name').innerText  = `${data.person.firstName} ${data.person.lastName}`;
   document.getElementById('conf-email').innerText = data.person.email;
+  const lastReviewed = data.lastReviewedAt
+    ? new Date(data.lastReviewedAt).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' })
+    : 'Just now';
+  document.getElementById('conf-last-reviewed').innerText = lastReviewed;
 
   // Show type-appropriate primary CTA
   const ctaDef = PRIMARY_CTA[currentAsset.assetType];
@@ -416,6 +427,7 @@ async function submitSignup() {
       ...result.data,
       assetName: currentAsset.name,
       assetType: currentAsset.assetType,
+      lastReviewedAt: new Date().toISOString(),
     }));
     showSuccess(result.data);
 
