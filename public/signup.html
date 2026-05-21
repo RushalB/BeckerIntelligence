@@ -111,43 +111,60 @@
           <section class="sidebar-card" id="reg-card">
             <div id="reg-form-content">
               <div class="reg-header">
-                <h3 class="reg-title">
+                <h3 class="reg-title" id="reg-title">
                   <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;stroke:var(--bh-navy-900);vertical-align:-2px;margin-right:8px;">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                     <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                   </svg>Request Access
                 </h3>
-                <p class="reg-text">Complete the form to access this content.</p>
+                <p class="reg-text" id="reg-text">Complete the form to access this content.</p>
               </div>
 
               <div class="error-box" id="validation-errors"></div>
 
               <form id="signup-form" novalidate>
-                <div class="form-group">
-                  <label for="email">Work Email</label>
-                  <input type="email" id="email" name="email" class="form-control" placeholder="name@hospital.org" required>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+
+                <!-- Step 1: Email only -->
+                <div id="step-1">
                   <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Linda" required>
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="name@hospital.org" required>
+                  </div>
+                  <button type="button" class="bh-btn bh-btn--primary btn-submit" id="continue-btn" style="margin-top:8px;">
+                    Continue &rarr;
+                  </button>
+                </div>
+
+                <!-- Returning user notice (shown when email is recognised) -->
+                <div id="returning-notice" style="display:none; margin-bottom:16px; padding:10px 12px; background:var(--bh-ice-050); border:1px solid var(--bh-gray-200); border-radius:4px; font-size:13px; color:var(--bh-gray-700);">
+                  <strong style="color:var(--bh-navy-900);">Welcome back!</strong> We found your details — submitting now.
+                </div>
+
+                <!-- Step 2: Remaining fields (hidden until email lookup completes) -->
+                <div id="step-2" style="display:none;">
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div class="form-group">
+                      <label for="firstName">First Name</label>
+                      <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Linda" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="lastName">Last Name</label>
+                      <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nguyen" required>
+                    </div>
                   </div>
                   <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nguyen" required>
+                    <label for="jobTitle">Job Title</label>
+                    <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Director of Informatics" required>
                   </div>
+                  <div class="form-group">
+                    <label for="companyName">Organization</label>
+                    <input type="text" id="companyName" name="companyName" class="form-control" placeholder="Mayo Clinic" required>
+                  </div>
+                  <button type="submit" class="bh-btn bh-btn--primary btn-submit" id="submit-btn" style="margin-top:8px;">
+                    Continue to Content &rarr;
+                  </button>
                 </div>
-                <div class="form-group">
-                  <label for="jobTitle">Job Title</label>
-                  <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Director of Informatics" required>
-                </div>
-                <div class="form-group">
-                  <label for="companyName">Organization</label>
-                  <input type="text" id="companyName" name="companyName" class="form-control" placeholder="Mayo Clinic" required>
-                </div>
-                <button type="submit" class="bh-btn bh-btn--primary btn-submit" id="submit-btn" style="margin-top:8px;">
-                  Continue to Content &rarr;
-                </button>
+
               </form>
             </div>
 

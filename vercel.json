@@ -7,6 +7,7 @@
   ],
   "routes": [
     { "src": "/assets(.*)", "dest": "/api/index.ts" },
+    { "src": "/persons(.*)", "dest": "/api/index.ts" },
     { "src": "/design_system/(.*)", "dest": "/design_system/$1" },
     { "src": "/(.*)", "dest": "/public/$1" }
   ]

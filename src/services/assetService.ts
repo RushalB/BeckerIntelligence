@@ -23,6 +23,17 @@ export async function getAssetById(id: string): Promise<LeadGenAsset | null> {
   return asset;
 }
 
+export async function lookupPersonByEmail(email: string): Promise<Person | null> {
+  const normalized = email.trim().toLowerCase();
+  const match = signups.find(s => s.person.email.toLowerCase() === normalized);
+  if (match) {
+    console.info(`[assetService] lookupPersonByEmail: found person id=${match.person.id} for email=${normalized}`);
+    return match.person;
+  }
+  console.info(`[assetService] lookupPersonByEmail: no person found for email=${normalized}`);
+  return null;
+}
+
 export async function signUpForAsset(
   assetId: string,
   person: Person

@@ -1,6 +1,23 @@
 import { Request, Response } from "express";
 import * as assetService from "../services/assetService";
-import { ApiError, ApiResponse, LeadGenAsset, SignUpPayload } from "../types";
+import { ApiError, ApiResponse, LeadGenAsset, Person, SignUpPayload } from "../types";
+
+export async function lookupPerson(
+  req: Request,
+  res: Response<ApiResponse<Person> | ApiError>
+): Promise<void> {
+  const email = req.query.email as string;
+  if (!email) {
+    res.status(400).json({ error: "email query parameter is required" });
+    return;
+  }
+  const person = await assetService.lookupPersonByEmail(email);
+  if (!person) {
+    res.status(404).json({ error: "Person not found" });
+    return;
+  }
+  res.json({ data: person });
+}
 
 export async function listAssets(
   req: Request,

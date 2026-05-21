@@ -1,5 +1,6 @@
 import express from "express";
 import assetsRouter from "./routes/assets";
+import personsRouter from "./routes/persons";
 
 import path from "path";
 
@@ -11,6 +12,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use("/design_system", express.static(path.join(__dirname, "../design_system")));
 
 app.use("/assets", assetsRouter);
+app.use("/persons", personsRouter);
 
 app.use(
   (
