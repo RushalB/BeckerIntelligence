@@ -96,7 +96,7 @@ This user is extremely busy and values speed and clarity. They consume quick, hi
 - Kept the landing page intentionally simple since users already trust the Becker’s brand
 - Featured speakers prominently because credibility and authority strongly influence engagement in healthcare media
 - Used a 2-step signup flow so returning users can quickly access content with minimal friction
-- Added filters, topic shortcuts, featured assets, and category tags to improve content discoverability and scanability
+- Added filters, topic shortcuts, featured assets, and added(self generated) category tags to improve content discoverability and scanability
 - Used secondary brand colors subtly to maintain a professional enterprise aesthetic
 
 ---
