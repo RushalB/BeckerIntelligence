@@ -119,7 +119,7 @@ This user is extremely busy and values speed and clarity. They consume quick, hi
 - Migrate to React for better scalability and maintainability as the platform grows
 
 
-##Raw
+## Raw
 I made a persona for the user who is VP of Strategic Operations & Innovation at a Hospital.
 His core needs are 
 Improve staffing efficiency
